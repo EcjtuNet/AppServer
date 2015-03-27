@@ -139,5 +139,41 @@ $app->get('/admin/settings', function() use ($app) {
 });
 
 
+// API v1
+$app->group('/api/v1', function () use ($app) {
+
+	$app->get('/articles', function () use ($app) {
+		$until = intval($app->request->get('until'));
+		if($until && $until>0){
+			$articles = Article::newest()
+				->published()
+				->where('id', '<', $until)
+				->take(10)
+				->get();
+		}else{
+			$articles = Article::published()->newest()->take(5)->get();
+		}
+		$articles = $articles->each(function($article){
+			unset($article['content']);
+			return $article;	
+		});
+		$articles = $articles->toArray();
+		echo json_encode(array('status'=>200, 'count'=>count($articles), 'articles'=>$articles));
+	});
+
+	$app->get('/article/:id', function ($id) use ($app) {
+		$article = Article::published()->with('Admin')->find($id);
+		if(!$article){
+			echo json_encode(array('status'=>404));
+			return ;
+		}
+		$arr = $article->toArray();
+		$arr['status'] = 200;
+		echo json_encode($arr);
+	});
+
+});
+
+
 $app->add(new AdminAuth());
 $app->run();
