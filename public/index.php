@@ -139,20 +139,25 @@ $app->get('/admin/push', function () use ($app) {
 	));
 });
 
-$app->post('/admin/push', function () use ($app) {
+$app->post('/admin/push', function () use ($app, $config) {
 	$message = $app->request->post('message');
 	$title = $app->request->post('title') ? $app->request->post('title') : '日新网手机客户端';
-
+	$aid = intval($app->request->post('aid'));
+	if(!$message || !$aid){
+		return $app->redirect('/admin/push');
+	}
+	$url = 'http://'.$config['domain'].'/api/v1/article/'.$aid.'/view';
 	$jpush = new JPush('1d70641588d99d929ffd92b3', '87021dc315cba2ebef9ef5ac');
 	$result = $jpush->push()
 	    ->setPlatform(M\all)
     	->setAudience(M\all)
-		->setNotification(M\notification(M\android($message, $title, 1, array("articleId"=>"1", "url"=>"http://www.ecjtu.net"))))
+		->setNotification(M\notification(M\android($message, $title, 1, array("articleId"=>$aid, "url"=>$url))))
 		->send();
 	$push = Push::create(array(
 		'msg_id' => $result->msg_id,
 		'title' => $title,
 		'message' => $message,
+		'article_id' => $aid,
 	));
 	$push->save();
 	return $app->redirect('/admin/push');
@@ -217,6 +222,15 @@ $app->group('/api/v1', function () use ($app) {
 		});
 		$articles = $articles->toArray();
 		echo json_encode(array('status'=>200, 'count'=>count($articles), 'articles'=>$articles));
+	});
+
+	$app->get('/article/:id/view', function ($id) use ($app) {
+		$article = Article::find($id);
+		if(!$article)
+			return $app->response->setStatus(404);
+		$app->render('api_article_view.php', array(
+			'content' => $article->content
+		));
 	});
 
 	$app->get('/article/:id', function ($id) use ($app) {

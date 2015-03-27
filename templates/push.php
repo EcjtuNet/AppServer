@@ -2,10 +2,20 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
   <form action="" method="POST">
     <div class="input-group ">
-      <span class="input-group-addon" id="sizing-addon1" >消息推送</span>
+      <span class="input-group-addon" id="sizing-addon1" >标题</span>
+      <input type="text" class="form-control" name="title" placeholder="" value="日新网手机客户端" aria-describedby="sizing-addon1">
+    </div>
+    <div class="input-group ">
+      <span class="input-group-addon" id="sizing-addon1" >内容</span>
       <input type="text" class="form-control" name="message" placeholder="" aria-describedby="sizing-addon1">
+    </div>
+    <div class="input-group ">
+      <span class="input-group-addon" id="sizing-addon1" >文章ID</span>
+      <input type="number" class="form-control" name="aid" placeholder="" aria-describedby="sizing-addon1">
+    </div>
+    <div class="input-group ">
       <span class="input-group-btn">
-        <input class="btn btn-default" type="submit" value="推送"/>
+          <input class="btn btn-info" type="submit" value="推送"/>
       </span>
     </div>
   </form>
