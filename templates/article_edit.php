@@ -5,6 +5,7 @@
 <script type="text/javascript" src="/simditor/scripts/hotkeys.js"></script>
 <script type="text/javascript" src="/simditor/scripts/uploader.js"></script>
 <script type="text/javascript" src="/simditor/scripts/simditor.js"></script>
+<script type="text/javascript" src="/simditor/scripts/simditor-dropzone.js"></script>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
   <form action="<?php echo $id ? '/admin/article/'.$id : '/admin/article';?>" method="POST">
   <div class="input-group ">
@@ -17,7 +18,33 @@
 </div>
 <script>
 var editor = new Simditor({
-  textarea: $('#editor')
+  textarea: $('#editor'),
+  upload:{
+    url: '/admin/image',
+    params: null,
+    fileKey: 'upload_file',
+    connectionCount: 3,
+    leaveConfirm: '正在上传文件，如果离开上传会自动取消'
+  },
+  pasteImage: true,
+  imageButton: 'upload',
+  toolbar:[
+    'title',
+    'bold',
+    'italic',
+    'underline',
+    'strikethrough',
+    'color',
+    'ol',
+    'ul',
+    'blockquote',
+    'table',
+    'link',
+    'image',
+    'hr',
+    'indent',
+    'outdent'
+  ]
 });
 </script>
 <?php require 'footer.php'; ?>

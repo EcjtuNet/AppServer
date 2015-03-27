@@ -148,9 +148,38 @@ $app->post('/admin/push', function () use ($app) {
 	return $app->redirect('/admin/push');
 });
 
-$app->get('/admin/settings', function() use ($app) {
+$app->get('/admin/settings', function () use ($app) {
 	return $app->render('settings.php', array(
 		'active' => 'settings'
+	));
+});
+
+$app->post('/admin/image', function () use ($app) {
+	if(!isset($_FILES['upload_file']))
+		return ;
+	$upload_dir = __DIR__.'/uploads/';
+	$filename = strval(time()) . strval(rand(100,999)) . '.jpg';
+	$file = $upload_dir . $filename;
+	$origin_file_name = $_FILES['upload_file']['name'];
+	if(!stristr($origin_file_name, '.') || end(explode('.', $origin_file_name)) != 'jpg') {
+		echo json_encode(array(
+			'success'=> false,
+			'msg'=> '请使用jpg格式图片',
+		));
+		return ;
+	}
+	try{
+		move_uploaded_file($_FILES['upload_file']['tmp_name'], $file);
+	}catch(Exception $e){
+		echo json_encode(array(
+			'success'=> false,
+			'msg'=> '文件权限不足',
+		));
+		return ;
+	}
+	echo json_encode(array(
+		'success'=> true,
+		'file_path'=> '/uploads/' . $filename,
 	));
 });
 
