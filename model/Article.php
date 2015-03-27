@@ -17,8 +17,15 @@ class Article extends Illuminate\Database\Eloquent\Model {
 	}
 
 	public function doPublish() {
-		$this->publish = true;
+		$this->published = true;
 		$this->published_at = Carbon::now();
+		$this->save();
+		return $this;
+	}
+
+	public function doCancel() {
+		$this->published = false;
+		$this->save();
 		return $this;
 	}
 }

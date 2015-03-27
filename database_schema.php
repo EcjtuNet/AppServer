@@ -15,7 +15,7 @@ Capsule::schema()->create('articles', function($table) {
 	$table->string('content');
 	$table->integer('admin_id')->nullable();
 	$table->integer('click')->default(0);
-	$table->boolean('publish')->default(false);
+	$table->boolean('published')->default(false);
 	$table->dateTime('published_at')->nullable();
 	$table->timestamps();
 });

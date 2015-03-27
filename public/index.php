@@ -72,6 +72,22 @@ $app->post('/admin/article', function () use ($app, $config) {
 	return $app->redirect('/admin/article/'.$article->id);
 });
 
+$app->get('/admin/article/:id/publish', function ($id) use ($app) {
+	$article = Article::find($id);
+	if(!$article)
+		return $app->redirect('/admin/articles');
+	$article->doPublish();
+	return $app->redirect('/admin/articles');
+});
+
+$app->get('/admin/article/:id/cancel', function ($id) use ($app) {
+	$article = Article::find($id);
+	if(!$article)
+		return $app->redirect('/admin/articles');
+	$article->doCancel();
+	return $app->redirect('/admin/articles');
+});
+
 $app->get('/admin/article/:id', function ($id) use ($app) {
 	$article = Article::find($id);
 	if(!$article)
@@ -138,6 +154,9 @@ $app->get('/admin/settings', function() use ($app) {
 	));
 });
 
+$app->get('/', function () use ($app) {
+
+});
 
 // API v1
 $app->group('/api/v1', function () use ($app) {
