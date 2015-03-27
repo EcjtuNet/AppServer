@@ -225,7 +225,7 @@ $app->group('/api/v1', function () use ($app) {
 	});
 
 	$app->get('/article/:id/view', function ($id) use ($app) {
-		$article = Article::find($id);
+		$article = Article::published()->find($id);
 		if(!$article)
 			return $app->response->setStatus(404);
 		$app->render('api_article_view.php', array(
