@@ -1,0 +1,16 @@
+debug: true
+development: true
+domain: 127.0.0.1
+secret_key: yoursecretkey
+connection: sqlite
+connections:
+    mysql:
+        host:		localhost
+        database:	database
+        username:	username
+        password:	password
+    sqlite:
+        host:		localhost
+        database:	/storage/database.sqlite
+        username:	username
+        password:	password
