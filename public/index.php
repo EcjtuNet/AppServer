@@ -63,9 +63,14 @@ $app->get('/admin/article/new', function () use ($app) {
 $app->post('/admin/article', function () use ($app, $config) {
 	$title = $app->request->post('title');
 	$content = $app->request->post('content');
+	$info = $app->request->post('info');
+	$thumb = $app->request->post('thumb') ? 
+		$app->request->post('thumb') : '/images/thumb_default.jpg';
 	$article = Article::create(array(
 		'title' => $title,
-		'content' => $content
+		'content' => $content,
+		'info' => $info,
+		'thumb' => $thumb,
 	));
 	if(!$config['development'])
 		$article->author = Admin::find($app->getCookie('admin'));
@@ -104,8 +109,13 @@ $app->post('/admin/article/:id', function ($id) use ($app) {
 		return $app->redirect('/admin/articles');
 	$title = $app->request->post('title');
 	$content = $app->request->post('content');
+	$info = $app->request->post('info');
+	$thumb = $app->request->post('thumb') ? 
+		$app->request->post('thumb') : '/images/thumb_default.jpg';	
 	$article->title = $title;
 	$article->content = $content;
+	$article->info = $info;
+	$article->thumb = $thumb;
 	$article->save();
 	return $app->redirect('/admin/article/'.$article->id);
 });

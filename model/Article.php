@@ -1,7 +1,7 @@
 <?php
 use Carbon\Carbon;
 class Article extends Illuminate\Database\Eloquent\Model {
-	protected $fillable = ['title', 'content'];
+	protected $fillable = ['title', 'content', 'info', 'thumb'];
 	protected $hidden = ['admin_id'];
 
 	public function scopeNewest ($query) {

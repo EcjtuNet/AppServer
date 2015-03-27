@@ -13,10 +13,12 @@ Capsule::schema()->create('articles', function($table) {
 	$table->increments('id');
 	$table->string('title');
 	$table->string('content');
+	$table->string('info')->nullable();
 	$table->integer('admin_id')->nullable();
 	$table->integer('click')->default(0);
 	$table->boolean('published')->default(false);
 	$table->dateTime('published_at')->nullable();
+	$table->string('thumb');
 	$table->timestamps();
 });
 
