@@ -30,3 +30,15 @@ Capsule::schema()->create('pushes', function($table) {
 	$table->integer('article_id')->nullable();
 	$table->timestamps();
 });
+
+Capsule::schema()->create('categories', function($table) {
+	$table->increments('id');
+	$table->string('text')->unique();
+	$table->timestamps();
+});
+
+Capsule::schema()->create('article_category', function($table) {
+	$table->integer('article_id');
+	$table->integer('category_id');
+	$table->primary(array('article_id', 'category_id'));
+});

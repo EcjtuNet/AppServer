@@ -54,9 +54,14 @@ $app->get('/admin/articles', function () use ($app) {
 });
 
 $app->get('/admin/article/new', function () use ($app) {
+	$categories = Category::all();
+	$categories = $categories->each(function($category){
+		$category->checked = false;
+	});
 	return $app->render('article_edit.php', array(
 		'id' => false,
 		'active' => 'article',
+		'categories' => $categories,
 	));
 });
 
@@ -66,6 +71,8 @@ $app->post('/admin/article', function () use ($app, $config) {
 	$info = $app->request->post('info');
 	$thumb = $app->request->post('thumb') ? 
 		$app->request->post('thumb') : '/images/thumb_default.jpg';
+	if(!$title || !$content || !$info || !$thumb)
+		return $app->redirect('/admin/articles');
 	$article = Article::create(array(
 		'title' => $title,
 		'content' => $content,
@@ -74,6 +81,12 @@ $app->post('/admin/article', function () use ($app, $config) {
 	));
 	if(!$config['development'])
 		$article->author = Admin::find($app->getCookie('admin'));
+	$categories = $app->request->post('categories');
+	foreach($categories as $id => $category){
+		if(Category::find($id))
+			$article->addCategory(Category::find($id));
+	}
+	$article->save();
 	return $app->redirect('/admin/article/'.$article->id);
 });
 
@@ -111,23 +124,37 @@ $app->post('/admin/article/:id', function ($id) use ($app) {
 	$content = $app->request->post('content');
 	$info = $app->request->post('info');
 	$thumb = $app->request->post('thumb') ? 
-		$app->request->post('thumb') : '/images/thumb_default.jpg';	
+		$app->request->post('thumb') : '/images/thumb_default.jpg';
+	if(!$title || !$content || !$info || !$thumb)
+		return $app->redirect('/admin/articles');
 	$article->title = $title;
 	$article->content = $content;
 	$article->info = $info;
 	$article->thumb = $thumb;
+	$categories = $app->request->post('categories');
+	$article->categories()->detach();
+	foreach($categories as $id => $category){
+		if($category && Category::find($id))
+			$article->addCategory(Category::find($id));
+	}
 	$article->save();
 	return $app->redirect('/admin/article/'.$article->id);
 });
 
 $app->get('/admin/article/:id/edit', function ($id) use ($app) {
 	$article = Article::find($id);
+	$categories = Category::all();
+	$categories = $categories->each(function($category) use ($article) {
+		$ids = $article->categories()->lists('id');
+		$category->checked = in_array($category->id, $ids) ? true : false;
+	});
 	if(!$article)
 		return $app->redirect('/admin/articles');
 	return $app->render('article_edit.php', array(
 		'id' => $article->id,
 		'active' => 'article',
 		'article' => $article,
+		'categories' => $categories,
 	));
 });
 
@@ -161,6 +188,32 @@ $app->post('/admin/push', function () use ($app, $config) {
 	));
 	$push->save();
 	return $app->redirect('/admin/push');
+});
+
+$app->get('/admin/category', function () use ($app) {
+	$categories = Category::newest()->get();
+	return $app->render('category.php', array(
+		'active' => 'category',
+		'categories' => $categories,
+	));
+});
+
+$app->post('/admin/category/:id', function ($id) use ($app) {
+	$text = $app->request->post('text');
+	$category = Category::find($id);
+	if(!$text || !$category)
+		return $app->redirect('/admin/category');
+	$category->text = $text;
+	$category->save();
+	return $app->redirect('/admin/category');
+});
+
+$app->post('/admin/category', function () use ($app) {
+	$text = $app->request->post('text');
+	if(!$text)
+		return $app->redirect('/admin/category');
+	Category::create(array('text'=>$text));
+	return $app->redirect('/admin/category');
 });
 
 $app->get('/admin/settings', function () use ($app) {

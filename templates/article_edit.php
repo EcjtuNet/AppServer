@@ -20,6 +20,12 @@
     <span class="input-group-addon" id="sizing-addon1" >缩略图</span>
     <input type="text" class="form-control" name="thumb" placeholder="" value="<?php echo $id ? $article->thumb : ''; ?>" aria-describedby="sizing-addon1">
   </div>
+  <div class="input-group">
+    <span class="input-group-addon" id="sizing-addon1" >分类</span>
+    <?php foreach($categories as $category): ?>
+      <input type="checkbox" autocomplete="off" name="categories[<?php echo $category->id; ?>]" <?php echo $category->checked ? 'checked' : ''; ?>><?php echo $category->text;?>
+    <?php endforeach; ?>
+  </div>
   <textarea id="editor" name="content" placeholder="这里输入内容" autofocus><?php echo $id ? $article->content : ''; ?></textarea>
   <input class="btn btn-info" type="submit" value="提交">
   </form>

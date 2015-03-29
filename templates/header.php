@@ -41,13 +41,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">日新网</a>
+          <a class="navbar-brand" href="/admin">日新网手机APP管理系统</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">面板</a></li>
-            <li><a href="#">设置</a></li>
-            <li><a href="#">个人</a></li>
+            <li><a href="http://www.ecjtu.net">首页</a></li>
+            <li><a href="http://news.ecjtu.net">新闻</a></li>
+            <li><a href="http://pic.ecjtu.net">图说</a></li>
             <li><a href="#">帮助</a></li>
           </ul>
           <form class="navbar-form navbar-right">
@@ -64,6 +64,7 @@
             <li class="<?php if($active=='dashboard') echo 'active'; ?>"><a href="/admin/dashboard">概览<?php if($active=='dashboard'): ?><span class="sr-only">(current)</span><?php endif; ?></a></li>
             <li class="<?php if($active=='article') echo 'active'; ?>"><a href="/admin/articles">文章<?php if($active=='article'): ?><span class="sr-only">(current)</span><?php endif; ?></a></li>
             <li class="<?php if($active=='push') echo 'active'; ?>"><a href="/admin/push">推送<?php if($active=='push'): ?><span class="sr-only">(current)</span><?php endif; ?></a></li>
+            <li class="<?php if($active=='category') echo 'active'; ?>"><a href="/admin/category">分类<?php if($active=='category'): ?><span class="sr-only">(current)</span><?php endif; ?></a></li>
             <li class="<?php if($active=='settings') echo 'active'; ?>"><a href="/admin/settings">设置<?php if($active=='settings'): ?><span class="sr-only">(current)</span><?php endif; ?></a></li>
           </ul>
         </div>

@@ -28,4 +28,15 @@ class Article extends Illuminate\Database\Eloquent\Model {
 		$this->save();
 		return $this;
 	}
+
+	public function categories() {
+		return $this->belongsToMany('Category');
+	}
+
+	public function addCategory($category) {
+		if(!$category)
+			return false;
+		$this->categories()->save($category);
+		return $this;
+	}
 }
