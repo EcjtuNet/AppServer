@@ -258,17 +258,52 @@ $app->get('/', function () use ($app) {
 // API v1
 $app->group('/api/v1', function () use ($app) {
 
+	$app->get('/index', function () use ($app) {
+		$until = intval($app->request->get('until'));
+		//分类ID为1的作为首页轮转图
+		$image_articles = Category::find(1)->articles()
+			->newest()
+			->with('Category')
+			->published()
+			->take(5)
+			->get();
+		$normal_articles = Article::whereNotIn('id', $image_articles->pluck('id'))
+			->newest()
+			->with('Category')
+			->published();
+		if($until && $until>0)
+			$normal_articles = $articles->until($until);
+		$normal_articles = $normal_articles->take(10)->get();
+		$image_articles = $image_articles->each(function($article){
+			unset($article['content']);
+			return $article;	
+		});
+		$normal_articles = $normal_articles->each(function($article){
+			unset($article['content']);
+			return $article;	
+		});
+		$image_articles = $normal_articles->toArray();
+		$normal_articles = $normal_articles->toArray();
+		$return = array(
+			'status' => 200,
+			'slide_article' => array(
+				'count' => count($image_articles),
+				'articles' => $image_articles,
+			), 
+			'normal_article' => array(
+				'count' => count($normal_articles),
+				'articles' => $normal_articles,
+			),
+		);
+		echo json_encode($return);
+	});
+
 	$app->get('/articles', function () use ($app) {
 		$until = intval($app->request->get('until'));
-		if($until && $until>0){
-			$articles = Article::newest()
-				->published()
-				->where('id', '<', $until)
-				->take(10)
-				->get();
-		}else{
-			$articles = Article::published()->newest()->take(5)->get();
-		}
+		$articles = Article::newest()->with('Category')->published();
+		if($until && $until>0)
+			$articles = $articles->until($until);
+		$articles = $articles->take(10)->get();
 		$articles = $articles->each(function($article){
 			unset($article['content']);
 			return $article;	

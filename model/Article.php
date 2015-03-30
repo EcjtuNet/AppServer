@@ -12,6 +12,10 @@ class Article extends Illuminate\Database\Eloquent\Model {
 		return $query->where('published', true);
 	}
 
+	public function scopeUntil ($query, $id) {
+		return $query->where('id', '<', $id);
+	}
+	
 	public function admin() {
 		return $this->belongsTo('Admin');
 	}
