@@ -267,7 +267,7 @@ $app->group('/api/v1', function () use ($app) {
 			->published()
 			->take(5)
 			->get();
-		$normal_articles = Article::whereNotIn('id', $image_articles->pluck('id'))
+		$normal_articles = Article::whereNotIn('id', $image_articles->lists('id'))
 			->newest()
 			->with('Category')
 			->published();
