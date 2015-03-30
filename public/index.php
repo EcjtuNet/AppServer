@@ -263,13 +263,13 @@ $app->group('/api/v1', function () use ($app) {
 		//分类ID为1的作为首页轮转图
 		$image_articles = Category::find(1)->articles()
 			->newest()
-			->with('Category')
+			->with('categories')
 			->published()
 			->take(5)
 			->get();
 		$normal_articles = Article::whereNotIn('id', $image_articles->lists('id'))
 			->newest()
-			->with('Category')
+			->with('categories')
 			->published();
 		if($until && $until>0)
 			$normal_articles = $articles->until($until);
@@ -282,7 +282,7 @@ $app->group('/api/v1', function () use ($app) {
 			unset($article['content']);
 			return $article;	
 		});
-		$image_articles = $normal_articles->toArray();
+		$image_articles = $image_articles->toArray();
 		$normal_articles = $normal_articles->toArray();
 		$return = array(
 			'status' => 200,
@@ -300,7 +300,7 @@ $app->group('/api/v1', function () use ($app) {
 
 	$app->get('/articles', function () use ($app) {
 		$until = intval($app->request->get('until'));
-		$articles = Article::newest()->with('Category')->published();
+		$articles = Article::newest()->with('categories')->published();
 		if($until && $until>0)
 			$articles = $articles->until($until);
 		$articles = $articles->take(10)->get();
