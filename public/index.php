@@ -252,7 +252,7 @@ $app->post('/admin/image', function () use ($app) {
 });
 
 $app->get('/', function () use ($app) {
-
+	return $app->render('index.php');
 });
 
 // API v1
