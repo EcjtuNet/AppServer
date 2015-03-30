@@ -81,7 +81,7 @@ $app->post('/admin/article', function () use ($app, $config) {
 	));
 	if(!$config['development'])
 		$article->author = Admin::find($app->getCookie('admin'));
-	$categories = $app->request->post('categories');
+	$categories = $app->request->post('categories') ?: array();
 	foreach($categories as $id => $category){
 		if(Category::find($id))
 			$article->addCategory(Category::find($id));
