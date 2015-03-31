@@ -44,8 +44,13 @@ $app->get('/admin/dashboard', function () use ($app) {
 	));
 });
 
-$app->get('/admin/articles', function () use ($app) {
-	$articles = Article::orderBy('created_at', 'desc')->take(10)->get();
+$app->get('/admin/article', function () use ($app) {
+	$page = $app->request->get('page') ?: 1;
+	//https://laracasts.com/discuss/channels/general-discussion/laravel-5-set-current-page-programatically?page=1
+	Illuminate\Pagination\Paginator::currentPageResolver(function() use ($page) {
+		return $page;
+	});
+	$articles = Article::orderBy('created_at', 'desc')->paginate(10)->setPath('article');
 	return $app->render('article_list.php', array(
 		'active' => 'article',
 		'articles' => $articles,
@@ -71,9 +76,9 @@ $app->post('/admin/article', function () use ($app, $config) {
 	$thumb = $app->request->post('thumb') ? 
 		$app->request->post('thumb') : '/images/thumb_default.jpg';
 	if(!$title || !$content || !$info || !$thumb)
-		return $app->redirect('/admin/articles');
+		return $app->redirect('/admin/article');
 	if(mb_strlen($title) > 13 || mb_strlen($info) > 40)
-		return $app->redirect('/admin/articles');
+		return $app->redirect('/admin/article');
 	$article = Article::create(array(
 		'title' => $title,
 		'content' => $content,
@@ -94,23 +99,23 @@ $app->post('/admin/article', function () use ($app, $config) {
 $app->get('/admin/article/:id/publish', function ($id) use ($app) {
 	$article = Article::find($id);
 	if(!$article)
-		return $app->redirect('/admin/articles');
+		return $app->redirect('/admin/article');
 	$article->doPublish();
-	return $app->redirect('/admin/articles');
+	return $app->redirect('/admin/article');
 });
 
 $app->get('/admin/article/:id/cancel', function ($id) use ($app) {
 	$article = Article::find($id);
 	if(!$article)
-		return $app->redirect('/admin/articles');
+		return $app->redirect('/admin/article');
 	$article->doCancel();
-	return $app->redirect('/admin/articles');
+	return $app->redirect('/admin/article');
 });
 
 $app->get('/admin/article/:id', function ($id) use ($app) {
 	$article = Article::find($id);
 	if(!$article)
-		return $app->redirect('/admin/articles');
+		return $app->redirect('/admin/article');
 	return $app->render('article.php', array(
 		'active' => 'article',
 		'article' => $article
@@ -120,16 +125,16 @@ $app->get('/admin/article/:id', function ($id) use ($app) {
 $app->post('/admin/article/:id', function ($id) use ($app) {
 	$article = Article::find($id);
 	if(!$article)
-		return $app->redirect('/admin/articles');
+		return $app->redirect('/admin/article');
 	$title = $app->request->post('title');
 	$content = $app->request->post('content');
 	$info = $app->request->post('info');
 	$thumb = $app->request->post('thumb') ? 
 		$app->request->post('thumb') : '/images/thumb_default.jpg';
 	if(!$title || !$content || !$info || !$thumb)
-		return $app->redirect('/admin/articles');
+		return $app->redirect('/admin/article');
 	if(mb_strlen($title) > 13 || mb_strlen($info) > 40)
-		return $app->redirect('/admin/articles');
+		return $app->redirect('/admin/article');
 	$article->title = $title;
 	$article->content = $content;
 	$article->info = $info;
@@ -152,7 +157,7 @@ $app->get('/admin/article/:id/edit', function ($id) use ($app) {
 		$category->checked = in_array($category->id, $ids) ? true : false;
 	});
 	if(!$article)
-		return $app->redirect('/admin/articles');
+		return $app->redirect('/admin/article');
 	return $app->render('article_edit.php', array(
 		'id' => $article->id,
 		'active' => 'article',
@@ -163,11 +168,16 @@ $app->get('/admin/article/:id/edit', function ($id) use ($app) {
 
 $app->get('/admin/article/:id/delete', function ($id) use ($app) {
 	Article::destroy($id);
-	return $app->redirect('/admin/articles');
+	return $app->redirect('/admin/article');
 });
 
 $app->get('/admin/push', function () use ($app) {
-	$pushes = Push::with('article')->orderBy('created_at', 'desc')->take(20)->get();
+	$page = $app->request->get('page') ?: 1;
+	//https://laracasts.com/discuss/channels/general-discussion/laravel-5-set-current-page-programatically?page=1
+	Illuminate\Pagination\Paginator::currentPageResolver(function() use ($page) {
+		return $page;
+	});
+	$pushes = Push::with('article')->orderBy('created_at', 'desc')->paginate(10)->setPath('push');
 	return $app->render('push.php', array(
 		'active' => 'push',
 		'pushes' => $pushes,
@@ -202,7 +212,12 @@ $app->post('/admin/push', function () use ($app, $config) {
 });
 
 $app->get('/admin/category', function () use ($app) {
-	$categories = Category::newest()->get();
+	$page = $app->request->get('page') ?: 1;
+	//https://laracasts.com/discuss/channels/general-discussion/laravel-5-set-current-page-programatically?page=1
+	Illuminate\Pagination\Paginator::currentPageResolver(function() use ($page) {
+		return $page;
+	});
+	$categories = Category::newest()->paginate(10)->setPath('category');
 	return $app->render('category.php', array(
 		'active' => 'category',
 		'categories' => $categories,
@@ -289,7 +304,7 @@ $app->group('/api/v1', function () use ($app) {
 		$normal_articles = $normal_articles->take(10)->get();
 		$image_articles = $image_articles->each(function($article){
 			unset($article['content']);
-			return $article;	
+			return $article;
 		});
 		$normal_articles = $normal_articles->each(function($article){
 			unset($article['content']);

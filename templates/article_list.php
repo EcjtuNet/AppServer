@@ -32,5 +32,6 @@
       </tbody>
     </table>
   </div>
+  <?php echo $articles->render(); ?>
 </div>
 <?php require 'footer.php'; ?>
