@@ -245,9 +245,23 @@ $app->post('/admin/category', function () use ($app) {
 });
 
 $app->get('/admin/settings', function () use ($app) {
+	$settings = Setting::all();
 	return $app->render('settings.php', array(
-		'active' => 'settings'
+		'active' => 'settings',
+		'settings' => $settings,
 	));
+});
+
+$app->post('/admin/settings', function () use ($app) {
+	$available = ['version_code', 'version_name'];
+	foreach($_POST as $key => $value) {
+		if(in_array($key, $available)) {
+			$row = Setting::firstOrCreate(array('key' => $key));
+			$row->value = $value;
+			$row->save();
+		}
+	}
+	return $app->redirect('/admin/settings');
 });
 
 $app->post('/admin/image', function () use ($app) {
@@ -358,6 +372,14 @@ $app->group('/api/v1', function () use ($app) {
 		$arr = $article->toArray();
 		$arr['status'] = 200;
 		echo json_encode($arr);
+	});
+
+	$app->get('/version', function () use ($app) {
+		echo json_encode(array(
+			'status' => 200,
+			'version_name' => Setting::find('version_name')->value,
+			'version_code' => Setting::find('version_code')->value,
+		));
 	});
 
 });
