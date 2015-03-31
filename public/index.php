@@ -161,6 +161,11 @@ $app->get('/admin/article/:id/edit', function ($id) use ($app) {
 	));
 });
 
+$app->get('/admin/article/:id/delete', function ($id) use ($app) {
+	Article::destroy($id);
+	return $app->redirect('/admin/articles');
+});
+
 $app->get('/admin/push', function () use ($app) {
 	$pushes = Push::with('article')->orderBy('created_at', 'desc')->take(20)->get();
 	return $app->render('push.php', array(
