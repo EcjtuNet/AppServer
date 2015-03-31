@@ -1,8 +1,12 @@
 <?php
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class Article extends Illuminate\Database\Eloquent\Model {
+	use SoftDeletes;
+	protected $dates = ['deleted_at'];
 	protected $fillable = ['title', 'content', 'info', 'thumb'];
 	protected $hidden = ['admin_id'];
+
 
 	public function scopeNewest ($query) {
 		return $query->orderBy('created_at', 'desc');

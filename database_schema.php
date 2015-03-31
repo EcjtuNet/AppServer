@@ -19,6 +19,7 @@ Capsule::schema()->create('articles', function($table) {
 	$table->boolean('published')->default(false);
 	$table->dateTime('published_at')->nullable();
 	$table->string('thumb');
+	$table->softDeletes();
 	$table->timestamps();
 });
 

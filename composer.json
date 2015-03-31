@@ -5,7 +5,8 @@
         "jpush/jpush": "~3.2",
         "illuminate/database": "~5.0",
         "symfony/config": "~2.6",
-        "php-curl-class/php-curl-class": "~2.1"
+        "php-curl-class/php-curl-class": "~2.1",
+        "illuminate/pagination": "~5.0"
     },
     "autoload": {
     	"classmap": ["model/", "middleware/"]

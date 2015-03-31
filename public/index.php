@@ -6,7 +6,6 @@ use JPush\Exception\APIConnectionException;
 use JPush\Exception\APIRequestException;
 use Carbon\Carbon;
 
-
 $app->get('/init', function () use ($app) {
 	Admin::create(array('username'=>'admin', 'password'=>Admin::salt('admin', 'admin')));
 });
@@ -45,8 +44,13 @@ $app->get('/admin/dashboard', function () use ($app) {
 	));
 });
 
-$app->get('/admin/articles', function () use ($app) {
-	$articles = Article::orderBy('created_at', 'desc')->take(10)->get();
+$app->get('/admin/article', function () use ($app) {
+	$page = $app->request->get('page') ?: 1;
+	//https://laracasts.com/discuss/channels/general-discussion/laravel-5-set-current-page-programatically?page=1
+	Illuminate\Pagination\Paginator::currentPageResolver(function() use ($page) {
+		return $page;
+	});
+	$articles = Article::orderBy('created_at', 'desc')->paginate(10)->setPath('article');
 	return $app->render('article_list.php', array(
 		'active' => 'article',
 		'articles' => $articles,
@@ -72,7 +76,9 @@ $app->post('/admin/article', function () use ($app, $config) {
 	$thumb = $app->request->post('thumb') ? 
 		$app->request->post('thumb') : '/images/thumb_default.jpg';
 	if(!$title || !$content || !$info || !$thumb)
-		return $app->redirect('/admin/articles');
+		return $app->redirect('/admin/article');
+	if(mb_strlen($title) > 13 || mb_strlen($info) > 40)
+		return $app->redirect('/admin/article');
 	$article = Article::create(array(
 		'title' => $title,
 		'content' => $content,
@@ -81,7 +87,7 @@ $app->post('/admin/article', function () use ($app, $config) {
 	));
 	if(!$config['development'])
 		$article->author = Admin::find($app->getCookie('admin'));
-	$categories = $app->request->post('categories');
+	$categories = $app->request->post('categories') ?: array();
 	foreach($categories as $id => $category){
 		if(Category::find($id))
 			$article->addCategory(Category::find($id));
@@ -93,23 +99,23 @@ $app->post('/admin/article', function () use ($app, $config) {
 $app->get('/admin/article/:id/publish', function ($id) use ($app) {
 	$article = Article::find($id);
 	if(!$article)
-		return $app->redirect('/admin/articles');
+		return $app->redirect('/admin/article');
 	$article->doPublish();
-	return $app->redirect('/admin/articles');
+	return $app->redirect('/admin/article');
 });
 
 $app->get('/admin/article/:id/cancel', function ($id) use ($app) {
 	$article = Article::find($id);
 	if(!$article)
-		return $app->redirect('/admin/articles');
+		return $app->redirect('/admin/article');
 	$article->doCancel();
-	return $app->redirect('/admin/articles');
+	return $app->redirect('/admin/article');
 });
 
 $app->get('/admin/article/:id', function ($id) use ($app) {
 	$article = Article::find($id);
 	if(!$article)
-		return $app->redirect('/admin/articles');
+		return $app->redirect('/admin/article');
 	return $app->render('article.php', array(
 		'active' => 'article',
 		'article' => $article
@@ -119,14 +125,16 @@ $app->get('/admin/article/:id', function ($id) use ($app) {
 $app->post('/admin/article/:id', function ($id) use ($app) {
 	$article = Article::find($id);
 	if(!$article)
-		return $app->redirect('/admin/articles');
+		return $app->redirect('/admin/article');
 	$title = $app->request->post('title');
 	$content = $app->request->post('content');
 	$info = $app->request->post('info');
 	$thumb = $app->request->post('thumb') ? 
 		$app->request->post('thumb') : '/images/thumb_default.jpg';
 	if(!$title || !$content || !$info || !$thumb)
-		return $app->redirect('/admin/articles');
+		return $app->redirect('/admin/article');
+	if(mb_strlen($title) > 13 || mb_strlen($info) > 40)
+		return $app->redirect('/admin/article');
 	$article->title = $title;
 	$article->content = $content;
 	$article->info = $info;
@@ -149,7 +157,7 @@ $app->get('/admin/article/:id/edit', function ($id) use ($app) {
 		$category->checked = in_array($category->id, $ids) ? true : false;
 	});
 	if(!$article)
-		return $app->redirect('/admin/articles');
+		return $app->redirect('/admin/article');
 	return $app->render('article_edit.php', array(
 		'id' => $article->id,
 		'active' => 'article',
@@ -158,8 +166,18 @@ $app->get('/admin/article/:id/edit', function ($id) use ($app) {
 	));
 });
 
+$app->get('/admin/article/:id/delete', function ($id) use ($app) {
+	Article::destroy($id);
+	return $app->redirect('/admin/article');
+});
+
 $app->get('/admin/push', function () use ($app) {
-	$pushes = Push::with('article')->orderBy('created_at', 'desc')->take(20)->get();
+	$page = $app->request->get('page') ?: 1;
+	//https://laracasts.com/discuss/channels/general-discussion/laravel-5-set-current-page-programatically?page=1
+	Illuminate\Pagination\Paginator::currentPageResolver(function() use ($page) {
+		return $page;
+	});
+	$pushes = Push::with('article')->orderBy('created_at', 'desc')->paginate(10)->setPath('push');
 	return $app->render('push.php', array(
 		'active' => 'push',
 		'pushes' => $pushes,
@@ -170,9 +188,12 @@ $app->post('/admin/push', function () use ($app, $config) {
 	$message = $app->request->post('message');
 	$title = $app->request->post('title') ? $app->request->post('title') : '日新网手机客户端';
 	$aid = intval($app->request->post('aid'));
-	if(!$message || !$aid){
+	if(!$message || !$aid)
 		return $app->redirect('/admin/push');
-	}
+	if(mb_strlen($title) > 10 || mb_strlen($message) > 16)
+		return $app->redirect('/admin/push');
+	if(!Article::find($id))
+		return $app->redirect('/admin/push');
 	$url = 'http://'.$config['domain'].'/api/v1/article/'.$aid.'/view';
 	$jpush = new JPush('1d70641588d99d929ffd92b3', '87021dc315cba2ebef9ef5ac');
 	$result = $jpush->push()
@@ -191,7 +212,12 @@ $app->post('/admin/push', function () use ($app, $config) {
 });
 
 $app->get('/admin/category', function () use ($app) {
-	$categories = Category::newest()->get();
+	$page = $app->request->get('page') ?: 1;
+	//https://laracasts.com/discuss/channels/general-discussion/laravel-5-set-current-page-programatically?page=1
+	Illuminate\Pagination\Paginator::currentPageResolver(function() use ($page) {
+		return $page;
+	});
+	$categories = Category::newest()->paginate(10)->setPath('category');
 	return $app->render('category.php', array(
 		'active' => 'category',
 		'categories' => $categories,
@@ -200,6 +226,8 @@ $app->get('/admin/category', function () use ($app) {
 
 $app->post('/admin/category/:id', function ($id) use ($app) {
 	$text = $app->request->post('text');
+	if(mb_strlen($text) > 6)
+		return $app->redirect('/admin/category');
 	$category = Category::find($id);
 	if(!$text || !$category)
 		return $app->redirect('/admin/category');
@@ -252,7 +280,7 @@ $app->post('/admin/image', function () use ($app) {
 });
 
 $app->get('/', function () use ($app) {
-
+	return $app->render('index.php');
 });
 
 // API v1
@@ -263,26 +291,26 @@ $app->group('/api/v1', function () use ($app) {
 		//分类ID为1的作为首页轮转图
 		$image_articles = Category::find(1)->articles()
 			->newest()
-			->with('Category')
+			->with('categories')
 			->published()
 			->take(5)
 			->get();
-		$normal_articles = Article::whereNotIn('id', $image_articles->pluck('id'))
+		$normal_articles = Article::whereNotIn('id', $image_articles->lists('id'))
 			->newest()
-			->with('Category')
+			->with('categories')
 			->published();
 		if($until && $until>0)
-			$normal_articles = $articles->until($until);
+			$normal_articles = $normal_articles->until($until);
 		$normal_articles = $normal_articles->take(10)->get();
 		$image_articles = $image_articles->each(function($article){
 			unset($article['content']);
-			return $article;	
+			return $article;
 		});
 		$normal_articles = $normal_articles->each(function($article){
 			unset($article['content']);
 			return $article;	
 		});
-		$image_articles = $normal_articles->toArray();
+		$image_articles = $image_articles->toArray();
 		$normal_articles = $normal_articles->toArray();
 		$return = array(
 			'status' => 200,
@@ -300,7 +328,7 @@ $app->group('/api/v1', function () use ($app) {
 
 	$app->get('/articles', function () use ($app) {
 		$until = intval($app->request->get('until'));
-		$articles = Article::newest()->with('Category')->published();
+		$articles = Article::newest()->with('categories')->published();
 		if($until && $until>0)
 			$articles = $articles->until($until);
 		$articles = $articles->take(10)->get();
