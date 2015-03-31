@@ -11,6 +11,7 @@
           <th>阅读量</th>
           <th>发布时间</th>
           <th>发布</th>
+          <th>删除</th>
         </tr>
       </thead>
       <tbody>
@@ -22,9 +23,10 @@
           <td><?php echo $article->published_at; ?></td>
           <?php if(!$article->published): ?>
           <td><a class="btn btn-info btn-xs" href="/admin/article/<?php echo $article->id; ?>/publish">发布</a></td>
-	      <?php else: ?>
+          <?php else: ?>
           <td><a class="btn btn-warning btn-xs" href="/admin/article/<?php echo $article->id; ?>/cancel">取消发布</a></td>
-	      <?php endif; ?>
+          <?php endif; ?>
+          <td><a class="btn btn-warning btn-xs" href="/admin/article/<?php echo $article->id; ?>/delete">删除</a></td>
         </tr>
         <?php endforeach; ?>
       </tbody>
