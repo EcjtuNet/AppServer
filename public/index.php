@@ -6,7 +6,6 @@ use JPush\Exception\APIConnectionException;
 use JPush\Exception\APIRequestException;
 use Carbon\Carbon;
 
-
 $app->get('/init', function () use ($app) {
 	Admin::create(array('username'=>'admin', 'password'=>Admin::salt('admin', 'admin')));
 });
@@ -73,6 +72,8 @@ $app->post('/admin/article', function () use ($app, $config) {
 		$app->request->post('thumb') : '/images/thumb_default.jpg';
 	if(!$title || !$content || !$info || !$thumb)
 		return $app->redirect('/admin/articles');
+	if(mb_strlen($title) > 13 || mb_strlen($info) > 40)
+		return $app->redirect('/admin/articles');
 	$article = Article::create(array(
 		'title' => $title,
 		'content' => $content,
@@ -127,6 +128,8 @@ $app->post('/admin/article/:id', function ($id) use ($app) {
 		$app->request->post('thumb') : '/images/thumb_default.jpg';
 	if(!$title || !$content || !$info || !$thumb)
 		return $app->redirect('/admin/articles');
+	if(mb_strlen($title) > 13 || mb_strlen($info) > 40)
+		return $app->redirect('/admin/articles');
 	$article->title = $title;
 	$article->content = $content;
 	$article->info = $info;
@@ -170,9 +173,12 @@ $app->post('/admin/push', function () use ($app, $config) {
 	$message = $app->request->post('message');
 	$title = $app->request->post('title') ? $app->request->post('title') : '日新网手机客户端';
 	$aid = intval($app->request->post('aid'));
-	if(!$message || !$aid){
+	if(!$message || !$aid)
 		return $app->redirect('/admin/push');
-	}
+	if(mb_strlen($title) > 10 || mb_strlen($message) > 16)
+		return $app->redirect('/admin/push');
+	if(!Article::find($id))
+		return $app->redirect('/admin/push');
 	$url = 'http://'.$config['domain'].'/api/v1/article/'.$aid.'/view';
 	$jpush = new JPush('1d70641588d99d929ffd92b3', '87021dc315cba2ebef9ef5ac');
 	$result = $jpush->push()
@@ -200,6 +206,8 @@ $app->get('/admin/category', function () use ($app) {
 
 $app->post('/admin/category/:id', function ($id) use ($app) {
 	$text = $app->request->post('text');
+	if(mb_strlen($text) > 6)
+		return $app->redirect('/admin/category');
 	$category = Category::find($id);
 	if(!$text || !$category)
 		return $app->redirect('/admin/category');

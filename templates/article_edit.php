@@ -10,11 +10,11 @@
   <form action="<?php echo $id ? '/admin/article/'.$id : '/admin/article';?>" method="POST">
   <div class="input-group ">
     <span class="input-group-addon" id="sizing-addon1" >标题</span>
-    <input type="text" class="form-control" name="title" placeholder="" value="<?php echo $id ? $article->title : ''; ?>" aria-describedby="sizing-addon1">
+    <input type="text" class="form-control" name="title" placeholder="" maxlength="13" value="<?php echo $id ? $article->title : ''; ?>" aria-describedby="sizing-addon1">
   </div>
   <div class="input-group ">
     <span class="input-group-addon" id="sizing-addon1" >描述</span>
-    <input type="text" class="form-control" name="info" placeholder="" value="<?php echo $id ? $article->info : ''; ?>" aria-describedby="sizing-addon1">
+    <input type="text" class="form-control" name="info" placeholder="" maxlength="40" value="<?php echo $id ? $article->info : ''; ?>" aria-describedby="sizing-addon1">
   </div>
   <div class="input-group ">
     <span class="input-group-addon" id="sizing-addon1" >缩略图</span>
