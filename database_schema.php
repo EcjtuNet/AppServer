@@ -43,3 +43,9 @@ Capsule::schema()->create('article_category', function($table) {
 	$table->integer('category_id');
 	$table->primary(array('article_id', 'category_id'));
 });
+
+Capsule::schema()->create('settings', function($table) {
+	$table->string('key');
+	$table->string('value')->nullable();
+	$table->timestamps();
+});
