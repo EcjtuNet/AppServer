@@ -181,7 +181,7 @@ $app->get('/admin/push', function () use ($app, $config) {
 	$msg_ids = implode(',', $pushes->lists('msg_id'));
 	$jpush = new JPush($config['jpush']['app_key'], $config['jpush']['master_secret']);
 	$result = $jpush->report($msg_ids)->received_list;
-	$pushes = $pushes->each(function ($push) {
+	$pushes = $pushes->each(function ($push) use ($result) {
 		foreach ($result as $row) {
 			if($push->msg_id == $row->msg_id) {
 				$push->received = ($row->android_received) ?: 0;
