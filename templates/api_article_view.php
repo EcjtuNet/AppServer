@@ -9,7 +9,14 @@
     <meta name="author" content="zvenshy@gmail.com, creatorlanslot@gmail.com">
     <link href="/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<article>
-<?php echo $content; ?>
-</article>
+<body>
+    <header>
+        <h1>这里是标题</h1>
+        <span class="writer">撰稿人</span>  <span class="write_at">2小时前</span>
+    </header>
+    <article>
+    <?php echo $content; ?>
+    </article>
+</body>
+
 </html>
