@@ -178,7 +178,7 @@ $app->get('/admin/push', function () use ($app, $config) {
 		return $page;
 	});
 	$pushes = Push::with('article')->orderBy('created_at', 'desc')->paginate(10)->setPath('push');
-	$msg_ids = $pushes->lists('msg_id');
+	$msg_ids = implode(',', $pushes->lists('msg_id'));
 	$jpush = new JPush($config['jpush']['app_key'], $config['jpush']['master_secret']);
 	$result = $jpush->report($msg_ids)->received_list;
 	$pushes = $pushes->each(function ($push) {
