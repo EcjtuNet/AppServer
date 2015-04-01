@@ -15,7 +15,7 @@
         <h1><?php echo $article->title; ?></h1>
         <span class="writer">撰稿人</span>  <span class="write_at"><?php $article->published_at;?></span>
     </header>
-    <article>
+    <article class="use">
     <?php echo $article->content; ?>
     </article>
 </body>
