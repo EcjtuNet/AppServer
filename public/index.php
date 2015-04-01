@@ -402,7 +402,7 @@ $app->group('/api/v1', function () use ($app) {
 		if(!$article)
 			return $app->response->setStatus(404);
 		$app->render('api_article_view.php', array(
-			'content' => $article->content
+			'article' => $article
 		));
 	});
 

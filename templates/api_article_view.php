@@ -11,12 +11,11 @@
 </head>
 <body>
     <header>
-        <h1>这里是标题</h1>
-        <span class="writer">撰稿人</span>  <span class="write_at">2小时前</span>
+        <h1><?php echo $article->title; ?></h1>
+        <span class="writer">撰稿人</span>  <span class="write_at"><?php $article->published_at;?></span>
     </header>
     <article>
-    <?php echo $content; ?>
+    <?php echo $article->content; ?>
     </article>
 </body>
-
 </html>
