@@ -280,7 +280,7 @@ $app->post('/admin/settings', function () use ($app) {
 		}catch(Exception $e){
 			return $app->redirect('/admin/settings');
 		}
-		$setting = Setting::firstOrCreate('key', 'apk');
+		$setting = Setting::firstOrCreate(array('key'=>'apk'));
 		$setting->value = $origin_file_name;
 		$setting->save();
 	}
