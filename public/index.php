@@ -418,10 +418,13 @@ $app->group('/api/v1', function () use ($app) {
 	});
 
 	$app->get('/version', function () use ($app) {
+		$filename = Setting::find('apk')->value;
+		$md5 = md5_file(__DIR__.'/uploads/'.$filename);
 		echo json_encode(array(
 			'status' => 200,
 			'version_name' => Setting::find('version_name')->value,
 			'version_code' => Setting::find('version_code')->value,
+			'md5' => $md5,
 		));
 	});
 
