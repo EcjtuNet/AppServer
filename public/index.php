@@ -271,7 +271,7 @@ $app->get('/admin/settings', function () use ($app) {
 $app->post('/admin/settings', function () use ($app) {
 	if(isset($_FILES['upload_file'])) {
 		$origin_file_name = $_FILES['upload_file']['name'];
-		$file = __DIR__.'/uploads'.$origin_file_name;
+		$file = __DIR__.'/uploads/'.$origin_file_name;
 		if(!stristr($origin_file_name, '.') || strtolower(end(explode('.', $origin_file_name))) != 'apk') {
 			return $app->redirect('/admin/settings');
 		}
@@ -329,7 +329,7 @@ $app->get('/download', function () use ($app) {
 	if(!$setting)
 		return $app->redirect('/');
 	$apk = $setting->value;
-	$file = '/uploads/'.$apk;
+	$file = __DIR__.'/uploads/'.$apk;
 	$fd = FileDownloader::createFromFilePath($file);
 	$fileDownload->sendDownload($apk);
 });
