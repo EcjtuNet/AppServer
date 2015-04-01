@@ -5,6 +5,7 @@ use JPush\JPushClient as JPush;
 use JPush\Exception\APIConnectionException;
 use JPush\Exception\APIRequestException;
 use Carbon\Carbon;
+use Apfelbox\FileDownload\FileDownload;
 
 $app->get('/init', function () use ($app) {
 	Admin::create(array('username'=>'admin', 'password'=>Admin::salt('admin', 'admin')));
@@ -327,7 +328,6 @@ $app->get('/download', function () use ($app) {
 		return $app->redirect('/');
 	$apk = $setting->value;
 	$file = '/uploads/'.$apk;
-	use Apfelbox\FileDownload\FileDownload;
 	$fd = FileDownloader::createFromFilePath($file);
 	$fileDownload->sendDownload($apk);
 });
