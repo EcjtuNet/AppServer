@@ -14,3 +14,6 @@ connections:
         database:	/storage/database.sqlite
         username:	username
         password:	password
+jpush:
+    app_key:        1d70641588d99d929ffd92b3
+    master_secret:  87021dc315cba2ebef9ef5ac

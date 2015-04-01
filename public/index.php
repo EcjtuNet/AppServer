@@ -171,7 +171,7 @@ $app->get('/admin/article/:id/delete', function ($id) use ($app) {
 	return $app->redirect('/admin/article');
 });
 
-$app->get('/admin/push', function () use ($app) {
+$app->get('/admin/push', function () use ($app, $config) {
 	$page = $app->request->get('page') ?: 1;
 	//https://laracasts.com/discuss/channels/general-discussion/laravel-5-set-current-page-programatically?page=1
 	Illuminate\Pagination\Paginator::currentPageResolver(function() use ($page) {
@@ -179,9 +179,8 @@ $app->get('/admin/push', function () use ($app) {
 	});
 	$pushes = Push::with('article')->orderBy('created_at', 'desc')->paginate(10)->setPath('push');
 	$msg_ids = $pushes->lists('msg_id');
-	$client = new JPushClient($app_key, $master_secret);
-	$result = $client->report($msg_ids)->received_list;
-
+	$jpush = new JPush($config['jpush']['app_key'], $config['jpush']['master_secret']);
+	$result = $jpush->report($msg_ids)->received_list;
 	$pushes = $pushes->each(function ($push) {
 		foreach ($result as $row) {
 			if($push->msg_id == $row->msg_id) {
@@ -209,7 +208,7 @@ $app->post('/admin/push', function () use ($app, $config) {
 	if(!Article::find($id))
 		return $app->redirect('/admin/push');
 	$url = 'http://'.$config['domain'].'/api/v1/article/'.$aid.'/view';
-	$jpush = new JPush('1d70641588d99d929ffd92b3', '87021dc315cba2ebef9ef5ac');
+	$jpush = new JPush($config['jpush']['app_key'], $config['jpush']['master_secret']);
 	$result = $jpush->push()
 	    ->setPlatform(M\all)
     	->setAudience(M\all)
