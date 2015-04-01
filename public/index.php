@@ -331,7 +331,7 @@ $app->get('/download', function () use ($app) {
 	$apk = $setting->value;
 	$file = __DIR__.'/uploads/'.$apk;
 	$fd = FileDownload::createFromFilePath($file);
-	$fileDownload->sendDownload($apk);
+	$fd->sendDownload($apk);
 });
 
 $app->get('/', function () use ($app) {
