@@ -266,6 +266,21 @@ $app->get('/admin/settings', function () use ($app) {
 });
 
 $app->post('/admin/settings', function () use ($app) {
+	if(isset($_FILES['upload_file'])) {
+		$origin_file_name = $_FILES['upload_file']['name'];
+		$file = __DIR__.'/uploads'.$origin_file_name;
+		if(!stristr($origin_file_name, '.') || strtolower(end(explode('.', $origin_file_name))) != 'apk') {
+			return $app->redirect('/admin/settings');
+		}
+		try{
+			move_uploaded_file($_FILES['upload_file']['tmp_name'], $file);
+		}catch(Exception $e){
+			return $app->redirect('/admin/settings');
+		}
+		$setting = Setting::firstOrCreate('key', 'apk');
+		$setting->value = $origin_file_name;
+		$setting->save();
+	}
 	$available = ['version_code', 'version_name'];
 	foreach($_POST as $key => $value) {
 		if(in_array($key, $available)) {
@@ -284,7 +299,7 @@ $app->post('/admin/image', function () use ($app) {
 	$filename = strval(time()) . strval(rand(100,999)) . '.jpg';
 	$file = $upload_dir . $filename;
 	$origin_file_name = $_FILES['upload_file']['name'];
-	if(!stristr($origin_file_name, '.') || end(explode('.', $origin_file_name)) != 'jpg') {
+	if(!stristr($origin_file_name, '.') || strtolower(end(explode('.', $origin_file_name))) != 'jpg') {
 		echo json_encode(array(
 			'success'=> false,
 			'msg'=> '请使用jpg格式图片',
@@ -304,6 +319,17 @@ $app->post('/admin/image', function () use ($app) {
 		'success'=> true,
 		'file_path'=> '/uploads/' . $filename,
 	));
+});
+
+$app->get('/download', function () use ($app) {
+	$setting = Setting::find('apk');
+	if(!$setting)
+		return $app->redirect('/');
+	$apk = $setting->value;
+	$file = '/uploads/'.$apk;
+	use Apfelbox\FileDownload\FileDownload;
+	$fd = FileDownloader::createFromFilePath($file);
+	$fileDownload->sendDownload($apk);
 });
 
 $app->get('/', function () use ($app) {

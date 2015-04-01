@@ -11,6 +11,10 @@
       <input type="text" class="form-control" name="version_code" placeholder="" value="<?php echo Setting::find('version_code')->value;?>" aria-describedby="sizing-addon1">
     </div>
     <div class="input-group ">
+      <span class="input-group-addon" id="sizing-addon1" >文件上传</span>
+      <input type="file" class="form-control filestyle" data-buttonBefore="true" name="upload_file" placeholder="" aria-describedby="sizing-addon1">
+    </div>
+    <div class="input-group ">
       <span class="input-group-btn">
           <input class="btn btn-info" type="submit" value="保存"/>
       </span>
