@@ -332,6 +332,7 @@ $app->get('/download', function () use ($app) {
 	$file = __DIR__.'/uploads/'.$apk;
 	$fd = FileDownload::createFromFilePath($file);
 	$fd->sendDownload($apk);
+	$app->response->headers->set('Content-Type', $fd->getMimeType($apk));
 	Log::record('download', 'download');
 });
 
