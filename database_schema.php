@@ -29,6 +29,7 @@ Capsule::schema()->create('pushes', function($table) {
 	$table->string('title');
 	$table->string('message');
 	$table->integer('article_id')->nullable();
+	$table->integer('received')->default(0);
 	$table->timestamps();
 });
 

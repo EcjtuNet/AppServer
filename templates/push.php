@@ -27,6 +27,7 @@
           <th>#</th>
           <th>msg_id</th>
           <th>内容</th>
+          <th>送达</th>
           <th>推送时间</th>
         </tr>
       </thead>
@@ -36,6 +37,7 @@
           <td><?php echo $push->id; ?></td>
           <td><?php echo $push->msg_id; ?></td>
           <td><?php echo $push->message; ?></td>
+          <td><?php echo $push->received; ?></td>
           <td><?php echo $push->created_at; ?></td>
         </tr>
         <?php endforeach; ?>

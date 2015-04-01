@@ -178,6 +178,20 @@ $app->get('/admin/push', function () use ($app) {
 		return $page;
 	});
 	$pushes = Push::with('article')->orderBy('created_at', 'desc')->paginate(10)->setPath('push');
+	$msg_ids = $pushes->lists('msg_id');
+	$client = new JPushClient($app_key, $master_secret);
+	$result = $client->report($msg_ids)->received_list;
+
+	$pushes = $pushes->each(function ($push) {
+		foreach ($result as $row) {
+			if($push->msg_id == $row->msg_id) {
+				$push->received = ($row->android_received) ?: 0;
+				break;
+			}
+		}
+		$push->save();
+		return $push;
+	});
 	return $app->render('push.php', array(
 		'active' => 'push',
 		'pushes' => $pushes,
