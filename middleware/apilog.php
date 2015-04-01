@@ -7,7 +7,7 @@ class ApiLog extends \Slim\Middleware
         $req = $app->request;
         $resourceUri = $req->getResourceUri();
         if(strncasecmp($resourceUri, '/api', 4) == 0) {
-            Log::log('api', $resourceUri);
+            Log::record('api', $resourceUri);
         }
         $this->next->call();
     }

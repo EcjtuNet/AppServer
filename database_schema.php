@@ -56,4 +56,4 @@ Capsule::schema()->create('logs', function($table) {
 	$table->string('type');
 	$table->string('content');
 	$table->timestamps();
-})
+});
