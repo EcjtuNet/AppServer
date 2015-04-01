@@ -13,7 +13,7 @@
 <body>
     <header>
         <h1><?php echo $article->title; ?></h1>
-        <span class="writer"><?php echo $article->admin->username; ?></span>  <span class="write_at"><?php echo $article->published_at;?></span>
+        <span class="writer">撰稿人</span>  <span class="write_at"><?php echo $article->published_at;?></span>
     </header>
     <article class="use">
     <?php echo $article->content; ?>
