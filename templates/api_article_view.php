@@ -8,6 +8,7 @@
     <meta name="description" content="rcss: a sample page framework">
     <meta name="author" content="zvenshy@gmail.com, creatorlanslot@gmail.com">
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.min.css" rel="stylesheet">
 </head>
 <body>
     <header>
