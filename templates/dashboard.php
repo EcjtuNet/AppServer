@@ -31,20 +31,20 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>标题</th>
-                  <th>阅读量</th>
-                  <th>发布时间</th>
-                  <th>发布</th>
+                  <th>类型</th>
+                  <th>内容</th>
+                  <th>时间</th>
                 </tr>
               </thead>
               <tbody>
+                <?php foreach($logs as $log): ?>
                 <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>2</td>
-                  <td>dolor</td>
-                  <td>sit</td>
+                  <td><?php echo $log->id; ?></td>
+                  <td><?php echo $log->type; ?></td>
+                  <td><?php echo $log->content; ?></td>
+                  <td><?php echo $log->created_at; ?></td>
                 </tr>
+                <?php endforeach;?>
               </tbody>
             </table>
           </div>

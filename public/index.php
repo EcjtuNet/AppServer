@@ -40,8 +40,10 @@ $app->get('/admin', function () use ($app) {
 });
 
 $app->get('/admin/dashboard', function () use ($app) {
+	$logs = Log::newest()->take(10)->get();
 	return $app->render('dashboard.php', array(
-		'active' => 'dashboard'
+		'active' => 'dashboard',
+		'logs' => $logs,
 	));
 });
 
@@ -425,4 +427,5 @@ $app->group('/api/v1', function () use ($app) {
 
 
 $app->add(new AdminAuth());
+$app->add(new ApiLog());
 $app->run();

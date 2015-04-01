@@ -50,3 +50,10 @@ Capsule::schema()->create('settings', function($table) {
 	$table->string('value')->nullable();
 	$table->timestamps();
 });
+
+Capsule::schema()->create('logs', function($table) {
+	$table->increments('id');
+	$table->string('type');
+	$table->string('content');
+	$table->timestamps();
+})
