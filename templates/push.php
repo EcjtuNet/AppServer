@@ -3,11 +3,11 @@
   <form action="" method="POST">
     <div class="input-group ">
       <span class="input-group-addon" id="sizing-addon1" >标题</span>
-      <input type="text" class="form-control" name="title" placeholder="" maxlength="10" value="日新网手机客户端" aria-describedby="sizing-addon1">
+      <input type="text" class="form-control" name="title" placeholder="" maxlength="10" value="日新网手机客户端" aria-describedby="sizing-addon1" required>
     </div>
     <div class="input-group ">
       <span class="input-group-addon" id="sizing-addon1" >内容</span>
-      <input type="text" class="form-control" name="message" placeholder="" maxlength="16" aria-describedby="sizing-addon1">
+      <input type="text" class="form-control" name="message" placeholder="" maxlength="16" aria-describedby="sizing-addon1" required>
     </div>
     <div class="input-group ">
       <span class="input-group-addon" id="sizing-addon1" >文章ID</span>

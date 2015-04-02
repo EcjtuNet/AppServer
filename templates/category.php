@@ -3,7 +3,7 @@
     <form action="" method="POST">
       <div class="input-group ">
         <span class="input-group-addon" id="sizing-addon1" >添加分类</span>
-        <input type="text" class="form-control" name="text" placeholder="分类名" maxlength="6" value="" aria-describedby="sizing-addon1">
+        <input type="text" class="form-control" name="text" placeholder="分类名" maxlength="6" value="" aria-describedby="sizing-addon1" required>
         <span class="input-group-btn">
           <input class="btn btn-info" type="submit" value="添加"/>
         </span>
