@@ -70,7 +70,7 @@ html, body {
 }
 	#download a {
 		display: block;
-		padding-left: 18px;
+		text-align: center;
 		text-decoration: none;
 		color: #fff;
 	}
