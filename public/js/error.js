@@ -7,4 +7,11 @@ $(document).ready(function(){
                   $(this).css('left', x_offset/parseFloat($(this).attr('data-move')));
         });
     });
+
+    var list = ['日新网手机客户端', '请在技术人员指导下食用'];
+    var i = 0;
+    setInterval(function() {
+    	i = i==0? 1:0;
+    	document.title = list[i];
+    }, 2000);
 });
