@@ -269,7 +269,7 @@ $app->get('/admin/settings', function () use ($app) {
 });
 
 $app->post('/admin/settings', function () use ($app) {
-	if(isset($_FILES['upload_file'])) {
+	if(isset($_FILES['upload_file']) && $_FILES['upload_file']['name']!='') {
 		$origin_file_name = $_FILES['upload_file']['name'];
 		$file = __DIR__.'/uploads/'.$origin_file_name;
 		if(!stristr($origin_file_name, '.') || strtolower(end(explode('.', $origin_file_name))) != 'apk') {
