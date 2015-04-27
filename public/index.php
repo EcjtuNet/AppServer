@@ -406,6 +406,7 @@ $app->group('/api/v1', function () use ($app) {
 		$article = Article::published()->find($id);
 		if(!$article)
 			return $app->response->setStatus(404);
+                $article->increClick();
 		$app->render('api_article_view.php', array(
 			'article' => $article
 		));

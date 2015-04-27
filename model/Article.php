@@ -47,4 +47,9 @@ class Article extends Illuminate\Database\Eloquent\Model {
 		$this->categories()->save($category);
 		return $this;
 	}
+
+        public function increClick() {
+                $this->increment('click');
+                return $this;
+        }
 }
