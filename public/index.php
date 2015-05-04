@@ -330,10 +330,10 @@ $app->get('/download', function () use ($app) {
 		return $app->redirect('/');
 	$apk = $setting->value;
 	$file = __DIR__.'/uploads/'.$apk;
+	Log::record('download', $apk);
 	$fd = FileDownload::createFromFilePath($file);
 	$fd->sendDownload($apk);
 	$app->response->headers->set('Content-Type', $fd->getMimeType($apk));
-	Log::record('download', 'download');
 });
 
 $app->get('/', function () use ($app) {
