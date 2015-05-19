@@ -9,6 +9,7 @@ require __DIR__.'/vendor/autoload.php';
 */
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Config\Definition\Processor;
+use Illuminate\Cache\CacheManager;
 
 $config = Yaml::parse(file_get_contents(__DIR__.'/config.yml'));
 

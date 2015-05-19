@@ -186,8 +186,8 @@ $app->get('/admin/push', function () use ($app, $config) {
 	$result = $jpush->report($msg_ids)->received_list;
 	$pushes = $pushes->each(function ($push) use ($result) {
 		foreach ($result as $row) {
-			if($push->msg_id == $row->msg_id) {
-				$push->received = ($row->android_received) ?: 0;
+			if($push->msg_id == $row->msg_id && $row->android_received > $push->received) {
+				$push->received = $row->android_received;
 				break;
 			}
 		}
