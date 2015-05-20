@@ -358,6 +358,9 @@ $app->group('/api/v1', function () use ($app) {
 			->take(5)
 			->get();
 		$normal_articles = Article::whereNotIn('id', $image_articles->lists('id'))
+			->whereHas('categories', function ($q) {
+				$q->where('id', '<>', 2);//id为2的为学院新闻
+			})
 			->newest()
 			->with('categories')
 			->published();
@@ -384,6 +387,27 @@ $app->group('/api/v1', function () use ($app) {
 				'count' => count($normal_articles),
 				'articles' => $normal_articles,
 			),
+		);
+		echo json_encode($return);
+	});
+
+	$app->get('/schoolnews', function () use ($app) {
+		$until = intval($app->request->get('until'));
+		$articles = Category::find(2)->articles()//id为2的为学院新闻
+			->newest()
+			->with('categories')
+			->published()
+		if($until && $until>0)
+			$articles = $articles->until($until);
+		$articles = $articles->each(function($article){
+			unset($article['content']);
+			return $article;
+		});
+		$article = $article->toArray();
+		$return = array(
+			'status' => 200,
+			'count' => count($articles),
+			'articles' => $articles,
 		);
 		echo json_encode($return);
 	});
