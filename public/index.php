@@ -174,6 +174,28 @@ $app->get('/admin/article/:id/delete', function ($id) use ($app) {
 	return $app->redirect('/admin/article');
 });
 
+$app->get('/admin/comment', function ($id) use ($app) {
+	$page = $app->request->get('page') ?: 1;
+	//https://laracasts.com/discuss/channels/general-discussion/laravel-5-set-current-page-programatically?page=1
+	Illuminate\Pagination\Paginator::currentPageResolver(function() use ($page) {
+		return $page;
+	});
+	$comments = Comment::newest()->paginate(10)->setPath('comment');
+	$comments = $comments->each(function($comment){
+		$comment->article = $comment->commentable;
+		return $comment;
+	});
+	return $app->render('comment.php', array(
+		'active' => 'comment',
+		'articles' => $comments,
+	));
+});
+
+$app->get('/admin/comment/:id/delete', function ($id) use ($app) {
+	Comment::destroy($id);
+	return $app->redirect('/admin/comment');
+});
+
 $app->get('/admin/push', function () use ($app, $config) {
 	$page = $app->request->get('page') ?: 1;
 	//https://laracasts.com/discuss/channels/general-discussion/laravel-5-set-current-page-programatically?page=1
