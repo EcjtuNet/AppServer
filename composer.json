@@ -10,6 +10,6 @@
         "apfelbox/php-file-download": "~2.1"
     },
     "autoload": {
-    	"classmap": ["model/", "middleware/"]
+    	"classmap": ["model/", "middleware/", "library/"]
     }
 }

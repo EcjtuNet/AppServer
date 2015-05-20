@@ -57,3 +57,12 @@ Capsule::schema()->create('logs', function($table) {
 	$table->string('content');
 	$table->timestamps();
 });
+
+Capsule::schema()->create('comments', function($table) {
+	$table->increments('id');
+	$table->morphs('commentable');
+	$table->string('author');
+	$table->string('content');
+	$table->softDeletes();
+	$table->timestamps();
+});

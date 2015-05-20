@@ -24,6 +24,10 @@ class Article extends Illuminate\Database\Eloquent\Model {
 		return $this->belongsTo('Admin');
 	}
 
+	public function comments() {
+		return $this->morphMany('Comment', 'commentable');
+	}
+
 	public function doPublish() {
 		$this->published = true;
 		$this->published_at = Carbon::now();
@@ -48,8 +52,8 @@ class Article extends Illuminate\Database\Eloquent\Model {
 		return $this;
 	}
 
-        public function increClick() {
-                $this->increment('click');
-                return $this;
-        }
+	public function increClick() {
+		$this->increment('click');
+		return $this;
+	}
 }

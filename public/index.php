@@ -427,13 +427,45 @@ $app->group('/api/v1', function () use ($app) {
 	});
 
 	$app->get('/article/:id/view', function ($id) use ($app) {
-		$article = Article::published()->find($id);
+		$article = Article::with('comments')->published()->find($id);
+		$comments = $article->comments;
 		if(!$article)
 			return $app->response->setStatus(404);
-                $article->increClick();
+		$article->increClick();
+		$comments = $comments->each(function($comment){
+			$sid = $comment->author;
+			$uc = UserCenter();
+			$comment->avatar = $uc->getAvatar($sid);
+			return $comment;
+		});
 		$app->render('api_article_view.php', array(
-			'article' => $article
+			'article' => $article,
+			'comments' => $comments,
 		));
+	});
+
+	$app->post('/article/:id/comment', function ($id) use ($app) {
+		$article = Article::published()->find($id);
+		if(!$article){
+			echo json_encode(array('status'=>404));
+			return ;
+		}
+		$content = $app->request->post('content');
+		$content = htmlspecialchars($content);
+		if(str_replace(' ', '', $content) == ''){
+			echo json_encode(array('status'=>400));
+			return ;
+		}
+		$sid = $app->request->params('sid');
+		$token = $app->request->params('token');
+		$user = new UserCenter($sid, $token);
+		if(!$user){
+			echo json_encode(array('status'=>403));
+			return ;
+		}
+		$comment = new Comment(array('author'=>$sid, 'content'=>$content));
+		$article->comments()->save($comment);
+		echo json_encode(array('status'=>200, 'content'=>$content));
 	});
 
 	$app->get('/article/:id', function ($id) use ($app) {
