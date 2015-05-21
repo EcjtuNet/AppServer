@@ -454,8 +454,8 @@ $app->group('/api/v1', function () use ($app) {
 			$sid = $comment->author;
 			$uc = new UserCenter();
 			$user = $uc->getUser($sid);
-			$comment->avatar = $user->avatar;
-			$comment->name = $user->name;
+			$comment->avatar = $user['avatar'];
+			$comment->name = $user['name'];
 			return $comment;
 		});
 		$app->render('api_article_view.php', array(
