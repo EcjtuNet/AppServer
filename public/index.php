@@ -187,7 +187,7 @@ $app->get('/admin/comment', function () use ($app) {
 	});
 	return $app->render('comment.php', array(
 		'active' => 'comment',
-		'articles' => $comments,
+		'comments' => $comments,
 	));
 });
 
