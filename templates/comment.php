@@ -19,8 +19,8 @@
           <td><?php echo $comment->id; ?></td>
           <td><?php echo $comment->author; ?></td>
           <td><?php echo $comment->content; ?></td>
-          <td><?php echo $comment->article->id; ?></td>
-          <td><?php echo $comment->article->title; ?></td>
+          <td><?php echo $comment->commentable->id; ?></td>
+          <td><?php echo $comment->commentable->title; ?></td>
           <td><a class="btn btn-warning btn-xs" href="/admin/comment/<?php echo $comment->id; ?>/delete">删除</a></td>
         </tr>
         <?php endforeach; ?>

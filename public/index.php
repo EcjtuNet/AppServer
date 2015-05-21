@@ -181,10 +181,6 @@ $app->get('/admin/comment', function () use ($app) {
 		return $page;
 	});
 	$comments = Comment::newest()->paginate(10)->setPath('comment');
-	$comments = $comments->each(function($comment){
-		$comment->article = $comment->commentable;
-		return $comment;
-	});
 	return $app->render('comment.php', array(
 		'active' => 'comment',
 		'comments' => $comments,
