@@ -20,13 +20,15 @@
     </article>
     <div class="comment">
         <ul>
+            <?php foreach($comments as $comment): ?>
             <li>
-                <div class="avatar"><img src="./images//head.jpg" alt=""></div>
+                <div class="avatar"><img src="<?php echo $comment->avatar; ?>" alt=""></div>
                 <div class="content">
-                    <span>用户名</span>
-                    <p>这儿是评论一堆评论这儿是评论一堆评论这儿是评论一堆评论这儿是评论一堆评论</p>
+                    <span><?php echo $comment->name; ?></span>
+                    <p><?php echo $comment->content; ?></p>
                 </div>
             </li>
+            <?php endforeach; ?>
         </ul>
 
     </div>

@@ -2,12 +2,8 @@
 use \Curl\Curl;
 class UserCenter {
 	const BASE_URL = 'user.ecjtu.net/api'
-	public function __construct($sid='', $token=''){
+	public function __construct(){
 		$this->curl = new Curl();
-		$this->sid = $sid;
-		$this->token = $token;
-		if($sid && $token)
-			return $this->getUser($sid, $token);
 	}
 	protected function get($url, $params=array()){
 		$result = '';
@@ -20,17 +16,15 @@ class UserCenter {
 			return false;
 		return $result;
 	}
-	public function getAvatar($sid){
-		$result = $this->get(self::BASE_URL.'/user/'.$sid);
-		if(!$result)
-			return false;
-		$avatar = $result['user']['avatar'];
-		return $avatar;
-	}
-	public function getUser($sid, $token){
-		$result = $this->get(self::BASE_URL.'/user/'.$sid, array(
-			'token' => $token
-		));
+	public function getUser($sid, $token=''){
+		$result = '';
+		if($token){
+			$result = $this->get(self::BASE_URL.'/user/'.$sid, array(
+				'token' => $token
+			));
+		}else{
+			$result = $this->get(self::BASE_URL.'/user/'.$sid);
+		}
 		if(!$result)
 			return false;
 		$user = $result['user'];
