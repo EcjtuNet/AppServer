@@ -1,7 +1,7 @@
 <?php
 use \Curl\Curl;
 class UserCenter {
-	const BASE_URL = 'user.ecjtu.net/api'
+	const BASE_URL = 'user.ecjtu.net/api';
 	public function __construct(){
 		$this->curl = new Curl();
 	}
