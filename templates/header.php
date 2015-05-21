@@ -63,6 +63,7 @@
           <ul class="nav nav-sidebar">
             <li class="<?php if($active=='dashboard') echo 'active'; ?>"><a href="/admin/dashboard">概览<?php if($active=='dashboard'): ?><span class="sr-only">(current)</span><?php endif; ?></a></li>
             <li class="<?php if($active=='article') echo 'active'; ?>"><a href="/admin/article">文章<?php if($active=='article'): ?><span class="sr-only">(current)</span><?php endif; ?></a></li>
+            <li class="<?php if($active=='comment') echo 'active'; ?>"><a href="/admin/comment">评论<?php if($active=='comment'): ?><span class="sr-only">(current)</span><?php endif; ?></a></li>
             <li class="<?php if($active=='push') echo 'active'; ?>"><a href="/admin/push">推送<?php if($active=='push'): ?><span class="sr-only">(current)</span><?php endif; ?></a></li>
             <li class="<?php if($active=='category') echo 'active'; ?>"><a href="/admin/category">分类<?php if($active=='category'): ?><span class="sr-only">(current)</span><?php endif; ?></a></li>
             <li class="<?php if($active=='settings') echo 'active'; ?>"><a href="/admin/settings">设置<?php if($active=='settings'): ?><span class="sr-only">(current)</span><?php endif; ?></a></li>

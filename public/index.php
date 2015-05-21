@@ -174,7 +174,7 @@ $app->get('/admin/article/:id/delete', function ($id) use ($app) {
 	return $app->redirect('/admin/article');
 });
 
-$app->get('/admin/comment', function ($id) use ($app) {
+$app->get('/admin/comment', function () use ($app) {
 	$page = $app->request->get('page') ?: 1;
 	//https://laracasts.com/discuss/channels/general-discussion/laravel-5-set-current-page-programatically?page=1
 	Illuminate\Pagination\Paginator::currentPageResolver(function() use ($page) {
