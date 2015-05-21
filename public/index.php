@@ -418,7 +418,7 @@ $app->group('/api/v1', function () use ($app) {
 		$articles = Category::find(2)->articles()//id为2的为学院新闻
 			->newest()
 			->with('categories')
-			->published()
+			->published();
 		if($until && $until>0)
 			$articles = $articles->until($until);
 		$articles = $articles->each(function($article){
