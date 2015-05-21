@@ -11,7 +11,7 @@ class UserCenter {
 			$result = $this->curl->get($url, $params);
 		else
 			$result = $this->curl->get($url);
-		$result = json_decode($result);
+		$result = json_decode($result, true);
 		if(!isset($result['result']) || $result['result']==false)
 			return false;
 		return $result;
