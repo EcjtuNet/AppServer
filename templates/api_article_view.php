@@ -18,5 +18,17 @@
     <article class="use">
     <?php echo $article->content; ?>
     </article>
+    <div class="comment">
+        <ul>
+            <li>
+                <div class="avatar"><img src="./images//head.jpg" alt=""></div>
+                <div class="content">
+                    <span>用户名</span>
+                    <p>这儿是评论一堆评论这儿是评论一堆评论这儿是评论一堆评论这儿是评论一堆评论</p>
+                </div>
+            </li>
+        </ul>
+
+    </div>
 </body>
 </html>
