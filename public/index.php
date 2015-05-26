@@ -417,7 +417,7 @@ $app->group('/api/v1', function () use ($app) {
 			->published();
 		if($until && $until>0)
 			$articles = $articles->until($until);
-		$atticles = $articles->take(10)->get();
+		$articles = $articles->take(10)->get();
 		$articles = $articles->each(function($article){
 			unset($article['content']);
 			return $article;
