@@ -422,7 +422,7 @@ $app->group('/api/v1', function () use ($app) {
 			unset($article['content']);
 			return $article;
 		});
-		$article = $article->toArray();
+		$article = $articles->toArray();
 		$return = array(
 			'status' => 200,
 			'count' => count($articles),
