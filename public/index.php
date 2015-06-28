@@ -199,7 +199,7 @@ $app->get('/admin/push', function () use ($app, $config) {
 		return $page;
 	});
 	$pushes = Push::with('article')->orderBy('created_at', 'desc')->paginate(10)->setPath('push');
-	if(!$pushes) {
+	if(!$pushes->lists('msg_id')) {
 		return $app->render('push.php', array(
 			'active' => 'push',
 			'pushes' => array(),
