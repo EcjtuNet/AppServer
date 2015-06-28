@@ -199,13 +199,14 @@ $app->get('/admin/push', function () use ($app, $config) {
 		return $page;
 	});
 	$pushes = Push::with('article')->orderBy('created_at', 'desc')->paginate(10)->setPath('push');
-	if(!$pushes->lists('msg_id')) {
+	$msg_list = $pushes->lists('msg_id');
+	if($msg_list->isEmpty()) {
 		return $app->render('push.php', array(
 			'active' => 'push',
 			'pushes' => array(),
 		));
 	}
-	$msg_ids = implode(',', $pushes->lists('msg_id'));
+	$msg_ids = implode(',', $msg_list);
 	$jpush = new JPush($config['jpush']['app_key'], $config['jpush']['master_secret']);
 	$result = $jpush->report($msg_ids)->received_list;
 	$pushes = $pushes->each(function ($push) use ($result) {
