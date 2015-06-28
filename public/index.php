@@ -199,6 +199,12 @@ $app->get('/admin/push', function () use ($app, $config) {
 		return $page;
 	});
 	$pushes = Push::with('article')->orderBy('created_at', 'desc')->paginate(10)->setPath('push');
+	if(!$pushes) {
+		return $app->render('push.php', array(
+			'active' => 'push',
+			'pushes' => array(),
+		));
+	}
 	$msg_ids = implode(',', $pushes->lists('msg_id'));
 	$jpush = new JPush($config['jpush']['app_key'], $config['jpush']['master_secret']);
 	$result = $jpush->report($msg_ids)->received_list;
@@ -279,10 +285,14 @@ $app->post('/admin/category', function () use ($app) {
 });
 
 $app->get('/admin/settings', function () use ($app) {
-	$settings = Setting::all();
+	$version_name = Setting::find('version_name');
+	$version_name = $version_name ? $version_name->value : '';
+	$version_code = Setting::find('version_code');
+	$version_code = $version_code ? $version_code->value : '';
 	return $app->render('settings.php', array(
 		'active' => 'settings',
-		'settings' => $settings,
+		'version_name' => $version_name,
+		'version_code' => $version_code,
 	));
 });
 

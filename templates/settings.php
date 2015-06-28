@@ -4,11 +4,11 @@
   <form action="" method="POST" enctype="multipart/form-data">
     <div class="input-group ">
       <span class="input-group-addon" id="sizing-addon1" >版本名</span>
-      <input type="text" class="form-control" name="version_name" placeholder="" value="<?php echo Setting::find('version_name')->value;?>" aria-describedby="sizing-addon1">
+      <input type="text" class="form-control" name="version_name" placeholder="" value="<?php echo $version_name;?>" aria-describedby="sizing-addon1">
     </div>
     <div class="input-group ">
       <span class="input-group-addon" id="sizing-addon1" >版本号</span>
-      <input type="text" class="form-control" name="version_code" placeholder="" value="<?php echo Setting::find('version_code')->value;?>" aria-describedby="sizing-addon1">
+      <input type="text" class="form-control" name="version_code" placeholder="" value="<?php echo $version_code;?>" aria-describedby="sizing-addon1">
     </div>
     <div class="input-group ">
       <span class="input-group-addon" id="sizing-addon1" >文件上传</span>
