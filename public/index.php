@@ -8,7 +8,15 @@ use Carbon\Carbon;
 use Apfelbox\FileDownload\FileDownload;
 
 $app->get('/init', function () use ($app) {
-	Admin::create(array('username'=>'admin', 'password'=>Admin::salt('admin', 'admin')));
+	$installed = Setting::find('installed');
+	if(!$installed) {
+		Admin::create(array('username'=>'admin', 'password'=>Admin::salt('admin', 'admin')));
+		Category::create(array('id'=>1, 'text'=>'轮转图'));
+		Category::create(array('id'=>2, 'text'=>'学院新闻'));
+		Setting::create(array('key'=>'version_name', 'value'=>'0'));
+		Setting::create(array('key'=>'version_code', 'value'=>'0'));
+		Setting::create(array('key'=>'installed', 'value'=>'true'));
+	}
 });
 
 $app->get('/login', function () use ($app) {
