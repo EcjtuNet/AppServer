@@ -165,7 +165,7 @@ $app->get('/admin/article/:id/edit', function ($id) use ($app) {
 	$categories = Category::all();
 	$categories = $categories->each(function($category) use ($article) {
 		$ids = $article->categories()->lists('id');
-		$category->checked = is_array($ids) && in_array($category->id, $ids) ? true : false;
+		$category->checked = (is_array($ids)&&in_array($category->id, $ids)) ? true : false;
 	});
 	if(!$article)
 		return $app->redirect('/admin/article');
