@@ -397,7 +397,8 @@ $app->group('/api/v1', function () use ($app) {
 			->take(5)
 			->get();
 		$normal_articles = Article::whereNotIn('id', $image_articles->lists('id'))
-			->whereHas('categories', function ($q) {
+			->whereDoesntHave('categories')
+			->orWhereHas('categories', function ($q) {
 				$q->where('id', '<>', 2);//id为2的为学院新闻
 			})
 			->newest()
