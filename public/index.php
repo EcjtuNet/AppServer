@@ -151,6 +151,8 @@ $app->post('/admin/article/:id', function ($id) use ($app) {
 	$article->info = $info;
 	$article->thumb = $thumb;
 	$categories = $app->request->post('categories');
+	if(!$categories)
+		$categories = array();
 	$article->categories()->detach();
 	foreach($categories as $id => $category){
 		if($category && Category::find($id))
@@ -164,7 +166,7 @@ $app->get('/admin/article/:id/edit', function ($id) use ($app) {
 	$article = Article::find($id);
 	$categories = Category::all();
 	$categories = $categories->each(function($category) use ($article) {
-		$ids = $article->categories()->lists('id');
+		$ids = $article->categories()->lists('id')->toArray();
 		$category->checked = (is_array($ids)&&in_array($category->id, $ids)) ? true : false;
 	});
 	if(!$article)
