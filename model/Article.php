@@ -17,9 +17,9 @@ class Article extends Illuminate\Database\Eloquent\Model {
 	}
 
 	public function scopeUntil ($query, $id) {
-		return $query->where('id', '>', $id);
+		return $query->where('id', '<', $id);
 	}
-	
+<
 	public function admin() {
 		return $this->belongsTo('Admin');
 	}
