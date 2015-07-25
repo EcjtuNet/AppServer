@@ -405,8 +405,9 @@ $app->group('/api/v1', function () use ($app) {
 			->with('categories')
 			->published();
 		if($until && $until>0){
+			echo $until;
 			$normal_articles = $normal_articles->until($until);
-			print_r($normal_articles);
+			var_dump($normal_articles);
 		}
 		$normal_articles = $normal_articles->take(10)->get();
 		$image_articles = $image_articles->each(function($article){
