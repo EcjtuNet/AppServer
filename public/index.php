@@ -389,47 +389,47 @@ $app->group('/api/v1', function () use ($app) {
 
 	$app->get('/index', function () use ($app) {
 		$until = intval($app->request->get('until'));
-		echo $until;
 		//分类ID为1的作为首页轮转图
-		// $image_articles = Category::find(1)->articles()
-		// 	->newest()
-		// 	->with('categories')
-		// 	->published()
-		// 	->take(5)
-		// 	->get();
-		// $normal_articles = Article::whereNotIn('id', $image_articles->lists('id'))
-		// 	->whereDoesntHave('categories')
-		// 	->orWhereHas('categories', function ($q) {
-		// 		$q->where('id', '<>', 2);//id为2的为学院新闻
-		// 	})
-		// 	->newest()
-		// 	->with('categories')
-		// 	->published();
-		// if($until && $until>0){
-		// 	$normal_articles = $normal_articles->until($until);
-		// }
-		// $normal_articles = $normal_articles->take(10)->get();
-		// $image_articles = $image_articles->each(function($article){
-		// 	unset($article['content']);
-		// 	return $article;
-		// });
-		// $normal_articles = $normal_articles->each(function($article){
-		// 	unset($article['content']);
-		// 	return $article;	
-		// });
-		// $image_articles = $image_articles->toArray();
-		// $normal_articles = $normal_articles->toArray();
-		// $return = array(
-		// 	'status' => 200,
-		// 	'slide_article' => array(
-		// 		'count' => count($image_articles),
-		// 		'articles' => $image_articles,
-		// 	), 
-		// 	'normal_article' => array(
-		// 		'count' => count($normal_articles),
-		// 		'articles' => $normal_articles,
-		// 	),
-		// );
+		$image_articles = Category::find(1)->articles()
+			->newest()
+			->with('categories')
+			->published()
+			->take(5)
+			->get();
+		$normal_articles = Article::whereNotIn('id', $image_articles->lists('id'))
+			->whereDoesntHave('categories')
+			->orWhereHas('categories', function ($q) {
+				$q->where('id', '<>', 2);//id为2的为学院新闻
+			})
+			->newest()
+			->with('categories')
+			->published();
+		if($until && $until>0){
+			$normal_articles = $normal_articles->until($until);
+			print_r($normal_articles);
+		}
+		$normal_articles = $normal_articles->take(10)->get();
+		$image_articles = $image_articles->each(function($article){
+			unset($article['content']);
+			return $article;
+		});
+		$normal_articles = $normal_articles->each(function($article){
+			unset($article['content']);
+			return $article;	
+		});
+		$image_articles = $image_articles->toArray();
+		$normal_articles = $normal_articles->toArray();
+		$return = array(
+			'status' => 200,
+			'slide_article' => array(
+				'count' => count($image_articles),
+				'articles' => $image_articles,
+			), 
+			'normal_article' => array(
+				'count' => count($normal_articles),
+				'articles' => $normal_articles,
+			),
+		);
 		// echo json_encode($return);
 	});
 
