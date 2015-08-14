@@ -404,10 +404,8 @@ $app->group('/api/v1', function () use ($app) {
 			->newest()
 			->with('categories')
 			->published();
-		if($until && $until>0){
-			$normal_articles = $normal_articles->until($until)->take(2)-get();
-			var_dump($normal_articles);
-		}
+		if($until && $until>0)
+			$normal_articles = $normal_articles->until($until);
 		$normal_articles = $normal_articles->take(10)->get();
 		$image_articles = $image_articles->each(function($article){
 			unset($article['content']);
