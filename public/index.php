@@ -397,17 +397,14 @@ $app->group('/api/v1', function () use ($app) {
 			->take(5)
 			->get();
 		$normal_articles = Article::whereNotIn('id', $image_articles->lists('id'))
-			->whereDoesntHave('categories')
 			->orWhereHas('categories', function ($q) {
 				$q->where('id', '<>', 2);//id为2的为学院新闻
 			})
 			->newest()
 			->with('categories')
 			->published();
-		if($until && $until>0){
-			$normal_articles = $normal_articles->until($until)->take(1)->get();
-			print_r($normal_articles);
-		}
+		if($until && $until>0)
+			$normal_articles = $normal_articles->until($until);
 		$normal_articles = $normal_articles->take(10)->get();
 		$image_articles = $image_articles->each(function($article){
 			unset($article['content']);
