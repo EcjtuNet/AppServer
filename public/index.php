@@ -373,6 +373,7 @@ $app->get('/download', function () use ($app) {
 	$fd = FileDownload::createFromFilePath($file);
 	$fd->sendDownload($apk);
 	$app->response->headers->set('Content-Type', $fd->getMimeType($apk));
+	$app->redirect('/uploads/'.$apk);
 });
 
 $app->get('/', function () use ($app) {
