@@ -1,6 +1,6 @@
 <?php
 use Illuminate\Database\Capsule\Manager as Capsule;
-require __DIR__.'/bootstrap.php';
+require '../bootstrap.php';
 
 Capsule::schema()->create('admins', function($table) {
 	$table->increments('id');
@@ -66,3 +66,4 @@ Capsule::schema()->create('comments', function($table) {
 	$table->softDeletes();
 	$table->timestamps();
 });
+
