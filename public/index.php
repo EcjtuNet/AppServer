@@ -495,8 +495,8 @@ $app->group('/api/v1', function () use ($app) {
 		$feedbook = new Feedbook(array('nikename' =>$nikename ,'feedbook' =>$feedbook ));
 		$feed->feedbooks()->save($feedbook);
 		echo json_encode(array('status'=>200, 'content'=>$feedbook));
-
-	});
+		$app->redirect('/');
+	})
 	
 	$app->post('/article/:id/comment', function ($id) use ($app) {
 		$article = Article::published()->find($id);
