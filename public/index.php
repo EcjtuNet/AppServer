@@ -483,7 +483,7 @@ $app->group('/api/v1', function () use ($app) {
 			'comments' => $comments,
 		));
 	});
-	$app->get('/feedbook',function() use($app,$config){
+	$app->get('/feedbook',function() use($app){
 		
 		$app->redirect('/');
 	})
