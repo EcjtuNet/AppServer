@@ -483,8 +483,7 @@ $app->group('/api/v1', function () use ($app) {
 			'comments' => $comments,
 		));
 	});
-
-	$app->post('/feedbook',function() use($app){
+	$app->post('/feedbook',function() use($app,$config){
 		$feed = new Feedbook;
 		$feedbook = $app->request->post('feedbook');
 		$nikename = $app->request->post('username');
