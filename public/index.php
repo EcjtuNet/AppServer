@@ -483,18 +483,8 @@ $app->group('/api/v1', function () use ($app) {
 			'comments' => $comments,
 		));
 	});
-	$app->post('/feedbook',function() use($app,$config){
-		$feed = new Feedbook;
-		$feedbook = $app->request->post('feedbook');
-		$nikename = $app->request->post('username');
-		$feedbook = htmlspecialchars($feedbook);
-		if(str_replace(' ', '', $content) == ''){
-			echo json_encode(array('status'=>404));
-			return ;
-		}
-		$feedbook = new Feedbook(array('nikename' =>$nikename ,'feedbook' =>$feedbook ));
-		$feed->feedbooks()->save($feedbook);
-		echo json_encode(array('status'=>200, 'content'=>$feedbook));
+	$app->get('/feedbook',function() use($app,$config){
+		
 		$app->redirect('/');
 	})
 	
