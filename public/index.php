@@ -483,10 +483,6 @@ $app->group('/api/v1', function () use ($app) {
 			'comments' => $comments,
 		));
 	});
-	$app->get('/feedbook',function() use($app){
-		
-		$app->redirect('/');
-	})
 	
 	$app->post('/article/:id/comment', function ($id) use ($app) {
 		$article = Article::published()->find($id);
