@@ -460,7 +460,7 @@ $app->group('/api/v1', function () use ($app) {
 			 ));
 		return ;
 	}
-	// $feedbook = new Feedbook;
+	 $feedbook = new Feedbook;
 	// $feedbook->content = $content;
 	// $feedbook->nikename = $nikename;
 	// $feedbook->save();
