@@ -334,6 +334,25 @@ $app->post('/admin/settings', function () use ($app) {
 	return $app->redirect('/admin/settings');
 });
 
+$app-post('/feedbook',function() use ($app){
+	$nikename = $app->request->post('username');
+	$content = $app->request->post('content');
+	if (!$content) {
+		echo json_encode(array(
+			'status' =>false ,
+			'msg'=>'请输入内容'
+			 ));
+		return ;
+	}
+	$feedbook = new Feedbook;
+	$feedbook->content = $content;
+	$feedbook->nikename = $nikename;
+	$feedbook->save();
+	echo json_encode(array(
+		'status' => 200
+		));
+});
+
 $app->post('/admin/image', function () use ($app) {
 	if(!isset($_FILES['upload_file']))
 		return ;
