@@ -373,6 +373,7 @@ $app->get('/download', function () use ($app) {
 	$fd = FileDownload::createFromFilePath($file);
 	$fd->sendDownload($apk);
 	$app->response->headers->set('Content-Type', $fd->getMimeType($apk));
+	return $app->redirect('http://fir.im/rixin');
 });
 
 $app->get('/', function () use ($app) {
@@ -516,12 +517,12 @@ $app->group('/api/v1', function () use ($app) {
 			return ;
 		}
 		$sid = $app->request->params('sid');
-		$token = $app->request->params('token');
-		$user = new UserCenter($sid, $token);
-		if(!$user){
-			echo json_encode(array('status'=>403));
-			return ;
-		}
+		// $token = $app->request->params('token');
+		// $user = new UserCenter($sid, $token);
+		// if(!$user){
+		// 	echo json_encode(array('status'=>403));
+		// 	return ;
+		// }
 		$comment = new Comment(array('author'=>$sid, 'content'=>$content));
 		$article->comments()->save($comment);
 		echo json_encode(array('status'=>200, 'content'=>$content));
