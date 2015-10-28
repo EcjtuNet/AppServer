@@ -377,7 +377,7 @@ $app->get('/download', function () use ($app) {
 
 $app->get('/', function () use ($app) {
 	$version_name = Setting::find('version_name');
-	$dt = Carbon::parse($version_name->created_at);
+	$dt = Carbon::parse($version_name->updated_at);
 	return $app->render('index.php', array(
 		'version_name' => $version_name->value,
 		'published_at' => $dt->toDateString(),
