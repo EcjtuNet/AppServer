@@ -517,7 +517,8 @@ $app->group('/api/v1', function () use ($app) {
 		}
 		$sid = $app->request->params('sid');
 		$token = $app->request->params('token');
-		$user = new UserCenter($sid, $token);
+		$uc = new UserCenter();
+		$user = $uc->getUser($sid,$token);
 		if(!$user){
 			echo json_encode(array('status'=>403));
 			return ;
