@@ -373,7 +373,6 @@ $app->get('/download', function () use ($app) {
 	$fd = FileDownload::createFromFilePath($file);
 	$fd->sendDownload($apk);
 	$app->response->headers->set('Content-Type', $fd->getMimeType($apk));
-	return $app->redirect('http://fir.im/rixin');
 });
 
 $app->get('/', function () use ($app) {
