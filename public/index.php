@@ -460,10 +460,10 @@ $app->group('/api/v1', function () use ($app) {
 			 ));
 		return ;
 	}
-	$feedbook = Feedbook::create(array(
-		'nikename' => $nikename,
-		'content' => $content
-		));
+	$feedbook = new Feedbook;
+	$feedbook->content = $content;
+	$feedbook->nikename = $nikename;
+	$feedbook->save();
 	echo json_encode(array(
 		'status' => 200
 		));
