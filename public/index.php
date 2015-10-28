@@ -486,21 +486,21 @@ $app->group('/api/v1', function () use ($app) {
 
 	$app->get('/article/:id/view', function ($id) use ($app) {
 		$article = Article::with('comments')->published()->find($id);
-		$comments = $article->comments;
+		// $comments = $article->comments;
 		if(!$article)
 			return $app->response->setStatus(404);
 		$article->increClick();
-		$comments = $comments->each(function($comment){
-			$sid = $comment->author;
-			$uc = new UserCenter();
-			$user = $uc->getUser($sid);
-			$comment->avatar = $user['avatar'];
-			$comment->name = $user['name'];
-			return $comment;
-		});
+		// $comments = $comments->each(function($comment){
+			// $sid = $comment->author;
+			// $uc = new UserCenter();
+			// $user = $uc->getUser($sid);
+			// $comment->avatar = $user['avatar'];
+			// $comment->name = $user['name'];
+			// return $comment;
+		// });
 		$app->render('api_article_view.php', array(
 			'article' => $article,
-			'comments' => $comments,
+			// 'comments' => $comments,
 		));
 	});
 	
