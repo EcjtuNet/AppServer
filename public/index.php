@@ -490,17 +490,17 @@ $app->group('/api/v1', function () use ($app) {
 		if(!$article)
 			return $app->response->setStatus(404);
 		$article->increClick();
-		// $comments = $comments->each(function($comment){
-			// $sid = $comment->author;
-			// $uc = new UserCenter();
-			// $user = $uc->getUser($sid);
-			// $comment->avatar = $user['avatar'];
-			// $comment->name = $user['name'];
-			// return $comment;
-		// });
+		$comments = $comments->each(function($comment){
+			$sid = $comment->author;
+			$uc = new UserCenter();
+			$user = $uc->getUser($sid);
+			$comment->avatar = $user['avatar'];
+			$comment->name = $user['name'];
+			return $comment;
+		});
 		$app->render('api_article_view.php', array(
 			'article' => $article,
-			// 'comments' => $comments,
+			'comments' => $comments,
 		));
 	});
 	
@@ -517,12 +517,12 @@ $app->group('/api/v1', function () use ($app) {
 			return ;
 		}
 		$sid = $app->request->params('sid');
-		// $token = $app->request->params('token');
-		// $user = new UserCenter($sid, $token);
-		// if(!$user){
-		// 	echo json_encode(array('status'=>403));
-		// 	return ;
-		// }
+		$token = $app->request->params('token');
+		$user = new UserCenter($sid, $token);
+		if(!$user){
+			echo json_encode(array('status'=>403));
+			return ;
+		}
 		$comment = new Comment(array('author'=>$sid, 'content'=>$content));
 		$article->comments()->save($comment);
 		echo json_encode(array('status'=>200, 'content'=>$content));
