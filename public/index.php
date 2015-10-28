@@ -450,7 +450,7 @@ $app->group('/api/v1', function () use ($app) {
 		echo json_encode($return);
 	});
 
-	$app->post('/feedbook',function() use ($app){
+	$app->post('/feedback',function() use ($app){
 	$nikename = $app->request->post('username');
 	$content = $app->request->post('content');
 	if (!$content) {
@@ -460,7 +460,7 @@ $app->group('/api/v1', function () use ($app) {
 			 ));
 		return ;
 	}
-	$feedbook = Feedbook::create(array(
+	$feedback = Feedback::create(array(
 		'nikename' => $nikename,
 		'content' => $content
 			));

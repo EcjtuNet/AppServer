@@ -66,6 +66,7 @@
             <li class="<?php if($active=='comment') echo 'active'; ?>"><a href="/admin/comment">评论<?php if($active=='comment'): ?><span class="sr-only">(current)</span><?php endif; ?></a></li>
             <li class="<?php if($active=='push') echo 'active'; ?>"><a href="/admin/push">推送<?php if($active=='push'): ?><span class="sr-only">(current)</span><?php endif; ?></a></li>
             <li class="<?php if($active=='category') echo 'active'; ?>"><a href="/admin/category">分类<?php if($active=='category'): ?><span class="sr-only">(current)</span><?php endif; ?></a></li>
+            <li class="<?php if($active=='feedback') echo 'active'; ?>"><a href="/admin/feedback">反馈<?php if($active=='feedback'): ?><span class="sr-only">(current)</span><?php endif; ?></a></li>
             <li class="<?php if($active=='settings') echo 'active'; ?>"><a href="/admin/settings">设置<?php if($active=='settings'): ?><span class="sr-only">(current)</span><?php endif; ?></a></li>
           </ul>
         </div>
