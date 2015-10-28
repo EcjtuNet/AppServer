@@ -486,7 +486,7 @@ $app->group('/api/v1', function () use ($app) {
 
 	$app->get('/article/:id/view', function ($id) use ($app) {
 		$article = Article::with('comments')->published()->find($id);
-		// $comments = $article->comments;
+		$comments = $article->comments;
 		if(!$article)
 			return $app->response->setStatus(404);
 		$article->increClick();
