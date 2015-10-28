@@ -372,12 +372,12 @@ $app->get('/download', function () use ($app) {
 	Log::record('download', $apk);
 	$fd = FileDownload::createFromFilePath($file);
 	$fd->sendDownload($apk);
-	$app->response->headers->set('Content-Type', $fd->getMimeType($apk));
+	$app->response->headers->set('Content-Type', 'application/vnd.android.package-archive');
 });
 
 $app->get('/', function () use ($app) {
 	$version_name = Setting::find('version_name');
-	$dt = Carbon::parse($version_name->created_at);
+	$dt = Carbon::parse($version_name->updated_at);
 	return $app->render('index.php', array(
 		'version_name' => $version_name->value,
 		'published_at' => $dt->toDateString(),
