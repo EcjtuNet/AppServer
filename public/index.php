@@ -372,7 +372,7 @@ $app->get('/download', function () use ($app) {
 	Log::record('download', $apk);
 	$fd = FileDownload::createFromFilePath($file);
 	$fd->sendDownload($apk);
-	$app->response->headers->set('Content-Type', $fd->getMimeType($apk));
+	$app->response->headers->set('Content-Type', 'application/vnd.android.package-archive');
 });
 
 $app->get('/', function () use ($app) {
