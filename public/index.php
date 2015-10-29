@@ -276,6 +276,11 @@ $app->get('/admin/category', function () use ($app) {
 	));
 });
 
+$app->get('/admin/feedbacks', function () use ($app){
+	$feedbacks = Feedback::all();
+	var_dump($feedbacks);
+});
+
 $app->post('/admin/category/:id', function ($id) use ($app) {
 	$text = $app->request->post('text');
 	if(mb_strlen($text) > 6)
