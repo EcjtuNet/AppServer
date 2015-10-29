@@ -180,9 +180,25 @@ $app->get('/admin/article/:id/edit', function ($id) use ($app) {
 });
 
 $app->get('/admin/article/:id/delete', function ($id) use ($app) {
+	Article::find($id)->comments->delete();
 	Article::destroy($id);
 	return $app->redirect('/admin/article');
 });
+
+$app->get('/admin/feedback',function() use ($app){
+	$page = $app->request->get('page') ?: 1;
+	//https://laracasts.com/discuss/channels/general-discussion/laravel-5-set-current-page-programatically?page=1
+	Illuminate\Pagination\Paginator::currentPageResolver(function() use ($page) {
+		return $page;
+	});
+	$feedbacks = Feedback::newest()->paginate(10)->setPath('feedback');
+	return $app->render('feedback.php',array(
+		'active' => feedback
+		'feedbacks' => $feedbacks,
+		));
+});
+
+
 
 $app->get('/admin/comment', function () use ($app) {
 	$page = $app->request->get('page') ?: 1;
