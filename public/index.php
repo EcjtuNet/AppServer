@@ -180,6 +180,7 @@ $app->get('/admin/article/:id/edit', function ($id) use ($app) {
 });
 
 $app->get('/admin/article/:id/delete', function ($id) use ($app) {
+	Article::find($id)->comments->delete();
 	Article::destroy($id);
 	return $app->redirect('/admin/article');
 });
