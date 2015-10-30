@@ -285,7 +285,7 @@ $app->get('/admin/feedbacks', function () use ($app){
 	$feedbacks = Feedback::all();
 	return $app->render('feedbacks.php',array(
 		'active' => 'feedbacks',
-		'feedbacks' => $feedbacks,
+		'feedbacks' => $feedbacks，
 		));
 });
 
