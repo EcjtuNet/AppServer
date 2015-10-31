@@ -408,7 +408,7 @@ $app->group('/api/v1', function () use ($app) {
 			->newest()
 			->with('categories')
 			->published()
-			->take(5)
+			->take(3)
 			->get();
 		$normal_articles = Article::whereNotIn('id', $image_articles->lists('id'))
 			->whereDoesntHave('categories')
