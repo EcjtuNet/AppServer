@@ -49,9 +49,11 @@ $app->get('/admin', function () use ($app) {
 
 $app->get('/admin/dashboard', function () use ($app) {
 	$logs = Log::newest()->take(10)->get();
+	$downloadCount = Log::where('type','=','download')->count();
 	return $app->render('dashboard.php', array(
 		'active' => 'dashboard',
 		'logs' => $logs,
+		'downloadCount' => $downloadCount,
 	));
 });
 

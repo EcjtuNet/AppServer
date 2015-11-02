@@ -6,7 +6,7 @@
             <div class="col-xs-6 col-sm-3 placeholder">
               <!-- <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail"> -->
               <h4>下载量</h4>
-              <span class="text-muted">5783</span>
+              <span class="text-muted"><?php echo $downloadCount;?></span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
               <!-- <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail"> -->
