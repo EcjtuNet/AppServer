@@ -282,18 +282,16 @@ $app->get('/admin/category', function () use ($app) {
 });
 
 $app->get('/admin/feedbacks', function () use ($app){
-	echo "string";
-	// $page = $app->request->get('page') ?: 1;
-	// //https://laracasts.com/discuss/channels/general-discussion/laravel-5-set-current-page-programatically?page=1
-	// Illuminate\Pagination\Paginator::currentPageResolver(function() use ($page) {
-	// 	return $page;
-	// });
-	// $feedbacks = Feedback::all();
-	// echo $feedbacks;
-	// return $app->render('feedbacks.php',array(
-	// 	'active' => 'feedbacks',
-	// 	'feedbacks' => $feedbacks,
-	// 	));
+	$page = $app->request->get('page') ?: 1;
+	//https://laracasts.com/discuss/channels/general-discussion/laravel-5-set-current-page-programatically?page=1
+	Illuminate\Pagination\Paginator::currentPageResolver(function() use ($page) {
+		return $page;
+	});
+	$feedbacks = Feedback::all();
+	return $app->render('feedbacks.php',array(
+		'active' => 'feedbacks',
+		'feedbacks' => $feedbacks,
+		));
 });
 
 $app->post('/admin/category/:id', function ($id) use ($app) {
