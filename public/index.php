@@ -269,11 +269,11 @@ $app->post('/admin/push', function () use ($app, $config) {
 });
 
 $app->get('/admin/category', function () use ($app) {
-	$page = $app->request->get('page') ?: 1;
-	//https://laracasts.com/discuss/channels/general-discussion/laravel-5-set-current-page-programatically?page=1
-	Illuminate\Pagination\Paginator::currentPageResolver(function() use ($page) {
-		return $page;
-	});
+	// $page = $app->request->get('page') ?: 1;
+	// //https://laracasts.com/discuss/channels/general-discussion/laravel-5-set-current-page-programatically?page=1
+	// Illuminate\Pagination\Paginator::currentPageResolver(function() use ($page) {
+	// 	return $page;
+	// });
 	$categories = Category::newest()->paginate(10)->setPath('category');
 	return $app->render('category.php', array(
 		'active' => 'category',
