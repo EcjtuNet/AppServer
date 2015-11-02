@@ -247,7 +247,7 @@ $app->post('/admin/push', function () use ($app, $config) {
 		return $app->redirect('/admin/push');
 	if(mb_strlen($title) > 10 || mb_strlen($message) > 16)
 		return $app->redirect('/admin/push');
-	if(!Article::find($id))
+	if(!Article::find($aid))
 		return $app->redirect('/admin/push');
 	$url = 'http://'.$config['domain'].'/api/v1/article/'.$aid.'/view';
 	$jpush = new JPush($config['jpush']['app_key'], $config['jpush']['master_secret']);
