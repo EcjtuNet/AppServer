@@ -222,7 +222,7 @@ $app->get('/admin/push', function () use ($app, $config) {
 			'pushes' => array(),
 		));
 	}
-	$msg_ids = implode(',', $msg_list);
+	$msg_ids = implode(',', $msg_list->toArray());
 	$jpush = new JPush($config['jpush']['app_key'], $config['jpush']['master_secret']);
 	$result = $jpush->report($msg_ids)->received_list;
 	$pushes = $pushes->each(function ($push) use ($result) {
