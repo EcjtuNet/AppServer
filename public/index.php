@@ -296,7 +296,7 @@ $app->get('/admin/feedbacks', function () use ($app){
 
 $app->post('/admin/category/:id', function ($id) use ($app) {
 	$text = $app->request->post('text');
-	if(mb_strlen($text) > 6)
+	if(mb_strlen($text) > 6)	
 		return $app->redirect('/admin/category');
 	$category = Category::find($id);
 	if(!$text || !$category)
@@ -504,10 +504,19 @@ $app->group('/api/v1', function () use ($app) {
 
 	$app->get('/article/:id/view', function ($id) use ($app) {
 		$article = Article::with('comments')->published()->find($id);
-		$comments = $article->comments;
 		if(!$article)
 			return $app->response->setStatus(404);
 		$article->increClick();
+		$app->render('api_article_view.php', array(
+			'article' => $article,
+		));
+	});
+	
+	$app->get('/article/:id/comments',function ($id) use ($app){
+		$article = Article::with('comments')->published()->find($id);
+		$comments = $article->comments;
+		if(!$article)
+			return $app->response->setStatus(404);
 		$comments = $comments->each(function($comment){
 			$sid = $comment->author;
 			$uc = new UserCenter();
@@ -516,12 +525,11 @@ $app->group('/api/v1', function () use ($app) {
 			$comment->name = $user['name'];
 			return $comment;
 		});
-		$app->render('api_article_view.php', array(
-			'article' => $article,
+		$app->render('review.php', array(
 			'comments' => $comments,
 		));
 	});
-	
+
 	$app->post('/article/:id/comment', function ($id) use ($app) {
 		$article = Article::published()->find($id);
 		if(!$article){
