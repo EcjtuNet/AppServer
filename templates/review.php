@@ -19,6 +19,7 @@
             </h6>
             <p class="user-review"><?php  echo $comment->content;?></p>
         </div>
+    <?php endforeach ?>
         <h6 class="review-tips">OuO 没有更多数据了呐</h6>
     </div>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
