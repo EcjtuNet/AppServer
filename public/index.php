@@ -517,16 +517,16 @@ $app->group('/api/v1', function () use ($app) {
 		$comments = $article->comments;
 		if(!$article)
 			return $app->response->setStatus(404);
+		$article->increClick();
+		$comments = $comments->each(function($comment){
+			$sid = $comment->author;
+			$uc = new UserCenter();
+			$user = $uc->getUser($sid);
+			$comment->avatar = $user['avatar'];
+			$comment->name = $user['name'];
+			return $comment;
+		});
 		var_dump($comments);
-		// $article->increClick();
-		// $comments = $comments->each(function($comment){
-		// 	$sid = $comment->author;
-		// 	$uc = new UserCenter();
-		// 	$user = $uc->getUser($sid);
-		// 	$comment->avatar = $user['avatar'];
-		// 	$comment->name = $user['name'];
-		// 	return $comment;
-		// });
 		// $app->render('review.php', array(
 		// 	'comments' => $comments,
 		// ));
