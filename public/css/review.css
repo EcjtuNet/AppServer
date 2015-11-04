@@ -3016,10 +3016,19 @@ body {
   position: absolute;
   top: 0;
   left: 0;
+  display: inline-block;
   width: 3.6rem;
   height: 3.6rem;
+  border: none;
   border-radius: 3.6rem;
+  overflow: hidden;
   background: #ccc url(); }
+
+.user-avatar img {
+  width: 3.6rem;
+  height: 3.6rem;
+  border: none;
+  border-radius: 3.6rem; }
 
 .user-name, .publish-time {
   display: block;

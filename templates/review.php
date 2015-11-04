@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>日新评论</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="/scss/style.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+    <link rel="stylesheet" href="/css/review.css"/>
 </head>
 <body>
     <div class="row">
         <?php foreach ($comments as $comment ) : ?>
         <div class="review-card s12 waves-effect light-waves">
             <h6 class="review-title">
-                <span class="user-avatar"></span>
+                <span class="user-avatar"><img src="http://<?php echo $comment->avatar; ?>" alt="头像"></span>
                 <span class="user-name"><?php echo $comment->name; ?></span>
                 <span class="publish-time"><?php echo $comment->create_at ?></span>
             </h6>
