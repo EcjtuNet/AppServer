@@ -526,10 +526,9 @@ $app->group('/api/v1', function () use ($app) {
 			$comment->name = $user['name'];
 			return $comment;
 		});
-		var_dump($comments);
-		// $app->render('review.php', array(
-		// 	'comments' => $comments,
-		// ));
+		$app->render('review.php', array(
+			'comments' => $comments,
+		));
 	});
 
 	$app->post('/article/:id/comment', function ($id) use ($app) {
