@@ -19,18 +19,5 @@
     <article class="use">
     <?php echo $article->content; ?>
     </article>
-    <div class="comment">
-        <ul>
-            <?php foreach($comments as $comment): ?>
-            <li>
-                <div class="avatar"><img src="http://<?php echo $comment->avatar; ?>" alt=""></div>
-                <div class="content">
-                    <span><?php echo $comment->name; ?></span>
-                    <p><?php echo $comment->content; ?></p>
-                </div>
-            </li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
 </body>
 </html>
