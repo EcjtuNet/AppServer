@@ -1,6 +1,5 @@
-config.yml
-storage/*.sqlite
 /vendor
-/public/uploads/*.jpg
-composer.lock
-*.swp
+/node_modules
+Homestead.yaml
+Homestead.json
+.env
