@@ -3,9 +3,8 @@ php:
   - 5.6
 before_install:
   - mysql -e 'create database test;'
-install:
   - composer install --prefer-source --no-interaction
-scripts:
+install:
   - php artisan migrate --env="testing"
   - php artisan db:seed --class=InitSeeder --env="testing"
 services:
