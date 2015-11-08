@@ -1,0 +1,87 @@
+/*		全局设置		*/
+a, img {
+    -webkit-touch-callout: none; /* 禁止长按链接与图片弹出菜单 */
+}
+*{
+	padding: 0px; 
+	margin: 0px;
+}
+html, body {
+    -webkit-user-select: none;   /* 禁止选中文本（如无文本选中需求，此为必选项） */
+    user-select: none;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+#content{
+	width: 100%;
+	height: 100%;
+	background: #fff url(/images/bg.png) no-repeat ;
+	background-size: cover;
+	background-position: center center;
+	z-index: -2;
+}
+#mask{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	opacity: 0.3;
+}
+#container{
+	width: 80%;
+	margin: 0 auto;
+	position: relative;
+}
+#container p#errorText{
+	position: relative;
+	padding-top: 40px;
+	color: #fff;
+	font-family: minijianxiyuan261591;
+	font-size: 24px;
+	text-align: center;
+}
+#logo{
+	position: relative;
+	margin: 16% auto 0; 
+	width: 180px;
+	height: 180px
+}
+	#logo img{
+		position: relative;
+		width: 100%;
+		height: 100%;
+	}
+#download{
+	width: 160px;
+	height: 50px;
+	position: relative;
+	margin: 10% auto 0; 
+	border: 1px solid #fff;
+	border-radius: 8px;
+	color: #fff;
+	font: normal 26px "Source Sans Pro", sans-serif;
+	font-weight: 100;
+	line-height: 50px;
+	letter-spacing: 3px
+}
+	#download a {
+		display: block;
+		text-align: center;
+		text-decoration: none;
+		color: #fff;
+	}
+	#download a:active{
+		background-color: #444;
+	}
+/*		版本号		*/
+p#version{
+	text-align: center;
+	font: normal 14px sans-serif;
+	color: #a5a0a0;
+	position: relative;
+	top: 5px;
+}

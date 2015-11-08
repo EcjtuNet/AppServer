@@ -8,7 +8,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
         "jpush/jpush": "^3.2",
-        "php-curl-class/php-curl-class": "^4.8"
+        "php-curl-class/php-curl-class": "^4.8",
+        "dingo/api": "1.0.x@dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
