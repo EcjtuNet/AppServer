@@ -21,7 +21,7 @@ class Init extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->string('content');
+            $table->text('content');
             $table->string('info')->nullable();
             $table->integer('admin_id')->nullable();
             $table->integer('click')->default(0);
@@ -69,6 +69,12 @@ class Init extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
+        Schema::create('feedbacks',function(Blueprint $table){
+            $table->increments('id');
+            $table->string('nikename');
+            $table->string('content');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -86,5 +92,6 @@ class Init extends Migration
         Schema::drop('settings');
         Schema::drop('logs');
         Schema::drop('comments');
+        Schema::drop('feedbacks');
     }
 }

@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function showList()
     {
-        $categories = Cagetory::newest()->paginate(10);
+        $categories = Category::newest()->paginate(10);
         return view('admin.category', [
             'active' => 'category',
             'categories' => $categories
