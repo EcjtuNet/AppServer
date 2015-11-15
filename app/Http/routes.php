@@ -27,11 +27,8 @@ Route::get('download', 'IndexController@download');
 Route::get('/', 'IndexController@show');
 
 Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin_'], function () {
-    Route::get('/', function () {
-        return redirect()->route('dashboard');
-    });
     Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@show']);
-    Route::get('article', ['as' => 'article_list', 'ueses' => 'ArticleController@showList']);
+    Route::get('article', ['as' => 'article_list', 'uses' => 'ArticleController@showList']);
     Route::get('article/new', 'ArticleController@showNew');
     Route::post('article', 'ArticleController@submit');
     Route::get('article/{id}/publish', 'ArticleController@publish');
@@ -51,6 +48,9 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'namespace' => 'Admi
     Route::post('setting', 'SettingController@submit');
     Route::post('image', 'ImageController@submit');
     Route::get('feedback', 'FeedbackController@showList');
+    Route::get('/', function () {
+        return redirect()->route('admin_dashboard');
+    });
 });
 
 $api->version('v1', function ($api) {
