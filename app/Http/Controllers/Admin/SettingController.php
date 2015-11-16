@@ -28,7 +28,7 @@ class SettingController extends Controller
                 return redirect()->route('admin_setting');
             }
             $file = $request->file('upload_file');
-            $extension = strtolower(($file->getClientOriginalExtension());
+            $extension = strtolower($file->getClientOriginalExtension());
             if($extension != 'apk') {
                 return redirect()->route('admin_setting');
             }
