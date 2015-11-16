@@ -6,6 +6,7 @@ before_install:
   - mysql -e 'create database test;'
   - composer install --prefer-source --no-interaction
 install:
+  - php artisan clear-compiled
   - php artisan migrate --env="testing"
   - php artisan db:seed --class=InitSeeder --env="testing"
 services:
