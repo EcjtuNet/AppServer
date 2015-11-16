@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Setting;
+use Storage;
 
 class SettingController extends Controller
 {
@@ -33,7 +34,7 @@ class SettingController extends Controller
                 return redirect()->route('admin_setting');
             }
             $filename = $file->getFilename() . '.' . $extension;
-            Storage::put('uploads/'. $filename, File::get($file));
+            Storage::put('uploads/'. $filename, file_get_contents($file->getRealPath()));
             $setting = Setting::firstOrCreate(array('key'=>'apk'));
             $setting->value = $filename;
             $setting->save();

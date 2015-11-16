@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Image;
+use Storage;
 
 class ImageController extends Controller
 {
@@ -19,7 +20,7 @@ class ImageController extends Controller
             return json_encode(['success' => false, 'msg' => '请使用jpg格式图片']);
         }
         $filename = strval(time()) . strval(rand(100,999)) . '.jpg';
-        Storage::put('uploads/' . $filename, File::get($file));
+        Storage::put('uploads/' . $filename, file_get_contents($file->getRealPath()));
         return json_encode([
             'success' => true, 
             'msg' => '上传成功', 
