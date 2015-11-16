@@ -52,10 +52,10 @@ class AdminTest extends TestCase
             ->seePageIs('/admin/article/new')
             ->see('标题');
         $this->visit('/admin/article/new')
-            ->type('title', '测试标题')
-            ->type('info', '测试描述')
+            ->type('测试标题', 'title')
+            ->type('测试描述', 'info')
             ->check('categories[1]')
-            ->type('content', '测试内容')
+            ->type('测试内容', 'content')
             ->press('提交')
             ->seePageIs('/admin/article/1');
         $this->visit('/admin/article/1')
@@ -68,7 +68,7 @@ class AdminTest extends TestCase
             ->see('测试内容')
             ->see('测试描述');
         $this->visit('/admin/article/1/edit')
-            ->type('content', '修改后的内容')
+            ->type('修改后的内容', 'content')
             ->press('提交')
             ->seePageIs('/admin/article/1')
             ->see('修改后的内容');
