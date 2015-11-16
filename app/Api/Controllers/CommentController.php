@@ -3,22 +3,23 @@
 namespace App\Api\Controllers;
 
 use App\Api\Controllers\Controller;
+use Dingo\Api\Http\Request;
 use App\Article;
 use App\Comment;
 use App\Library\EcjtuNet\UserCenter;
 
 class CommentController extends Controller
 {
-    public function submit()
+    public function submit(Request $request)
     {
         $article = Article::published()->findOrFail($id);
-        $content = Request::input('content');
+        $content = $request->input('content');
         $content = htmlspecialchars($content);
         if (str_replace(' ', '', $content) == '') {
             throw new Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
         }
-        $sid = Request::input('sid');
-        $token = Request::input('token');
+        $sid = $request->input('sid');
+        $token = $request->input('token');
         $uc = new UserCenter();
         $user = $uc->getUser($sid, $token);
         if (!$user) {

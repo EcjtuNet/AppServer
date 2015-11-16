@@ -3,13 +3,14 @@
 namespace App\Api\Controllers;
 
 use App\Api\Controllers\Controller;
+use Dingo\Api\Http\Request;
 use App\Article;
 
 class ArticleController extends Controller
 {
-    public function showList()
+    public function showList(Request $request)
     {
-        $until = Request::get('until');
+        $until = $request->get('until');
         $articles = Article::newest()->with('categories')->published();
         if ($until && $until>0) {
             $articles = $articles->until($until);

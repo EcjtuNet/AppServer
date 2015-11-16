@@ -3,14 +3,15 @@
 namespace App\Api\Controllers;
 
 use App\Api\Controllers\Controller;
+use Dingo\Api\Http\Request;
 use App\Category;
 use App\Article;
 
 class IndexController extends Controller
 {
-    public function showIndex()
+    public function showIndex(Request $request)
     {
-        $until = intval(Request::get('until'));
+        $until = intval($request->get('until'));
         //分类ID为1的作为首页轮转图
         $image_articles = Category::find(1)->articles()
             ->newest()
@@ -51,9 +52,9 @@ class IndexController extends Controller
         return $return;
     }
 
-    public function showSchoolnews()
+    public function showSchoolnews(Request $request)
     {
-        $until = intval(Request::get('until'));
+        $until = intval($request->get('until'));
         //id为2的为学院新闻
         $articles = Category::find(2)->articles()
             ->newest()

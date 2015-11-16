@@ -3,14 +3,15 @@
 namespace App\Api\Controllers;
 
 use App\Api\Controllers\Controller;
+use Dingo\Api\Http\Request;
 use App\Feedback;
 
-class VersionController extends Controller
+class FeedbackController extends Controller
 {
-    public function submit()
+    public function submit(Request $request)
     {
-        $nikename = Request::input('nickname');
-        $content = Request::input('content');
+        $nikename = $request->input('nickname');
+        $content = $request->input('content');
         if (!$content) {
             return [
                 'status' => false,
