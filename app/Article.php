@@ -21,10 +21,10 @@ class Article extends Model
         return $query->where('id','<', $id);
     }
     public function admin() {
-        return $this->belongsTo('Admin');
+        return $this->belongsTo('App\Admin');
     }
     public function comments() {
-        return $this->morphMany('Comment', 'commentable');
+        return $this->morphMany('App\Comment', 'commentable');
     }
     public function doPublish() {
         $this->published = true;
@@ -38,7 +38,7 @@ class Article extends Model
         return $this;
     }
     public function categories() {
-        return $this->belongsToMany('Category');
+        return $this->belongsToMany('App\Category');
     }
     public function addCategory($category) {
         if(!$category)
