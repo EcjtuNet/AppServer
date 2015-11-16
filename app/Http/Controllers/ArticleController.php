@@ -7,7 +7,7 @@ use App\Article;
 
 class ArticleController extends Controller
 {
-    public function showView()
+    public function showView($id)
     {
         $article = Article::with('comments')->published()->findOrFail($id);
         $article->increClick();

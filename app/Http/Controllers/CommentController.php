@@ -8,7 +8,7 @@ use App\Library\EcjtuNet\UserCenter;
 
 class CommentController extends Controller
 {
-    public function showComments()
+    public function showComments($id)
     {
         $article = Article::with('comments')->published()->findOrFail($id);
         $comments = $article->comments;
