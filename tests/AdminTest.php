@@ -39,7 +39,10 @@ class AdminTest extends TestCase
     }
     public function testDashboard()
     {
-        $this->call('GET', '/api/index');
+        $log = factory(App\Log::class)->make([
+            'type' => 'api',
+            'content' => 'api/index'
+            ]);
         $this->withSession(['admin' => 'admin'])
             ->visit('/admin/dashboard')
             ->see('api/index');
