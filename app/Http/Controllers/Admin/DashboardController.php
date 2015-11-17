@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Log;
 
-class AdminController extends Controller
+class DashboardController extends Controller
 {
     public function show()
     {

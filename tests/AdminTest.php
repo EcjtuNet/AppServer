@@ -12,7 +12,7 @@ class AdminTest extends TestCase
             ->see('请登录');
         $this->visit('/admin/dashboard')
             ->see('请登录');
-        $this->visit('/admin')
+        $this->visit('/admin/login')
             ->type('admin', 'username')
             ->type('admin', 'password')
             ->press('登录')
@@ -39,7 +39,7 @@ class AdminTest extends TestCase
     }
     public function testDashboard()
     {
-        $this->visit('/api/index');
+        $this->call('GET', '/api/index');
         $this->withSession(['admin' => 'admin'])
             ->visit('/admin/dashboard')
             ->see('api/index');
@@ -78,6 +78,6 @@ class AdminTest extends TestCase
             ->see('取消发布');
         $this->visit('/admin/article')
             ->click('删除')
-            ->dontSee('删除');
+            ->dontSee('/delete');
     }
 }
