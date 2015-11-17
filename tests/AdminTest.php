@@ -39,7 +39,7 @@ class AdminTest extends TestCase
     }
     public function testDashboard()
     {
-        $log = factory(App\Log::class)->make([
+        $log = factory(App\Log::class)->create([
             'type' => 'api',
             'content' => 'api/index'
             ]);
