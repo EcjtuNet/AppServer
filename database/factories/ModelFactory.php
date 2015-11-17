@@ -13,7 +13,7 @@
 
 $factory->define(App\Log::class, function (Faker\Generator $faker) {
     return [
-        'type' => 'api'
+        'type' => 'api',
         'content' => 'api/index',
     ];
 });
