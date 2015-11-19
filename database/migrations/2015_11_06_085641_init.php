@@ -58,7 +58,7 @@ class Init extends Migration
         Schema::create('logs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('type');
-            $table->string('content');
+            $table->string('content')->nullable();
             $table->timestamps();
         });
         Schema::create('comments', function (Blueprint $table) {
