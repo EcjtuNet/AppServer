@@ -54,7 +54,7 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'namespace' => 'Admi
 });
 
 $api->version('v1', function ($api) {
-    $api->group(['middleware' => 'ApiLog'], function ($api){
+    $api->group(['middleware' => 'ApiLog', 'prefix' => 'v1'], function ($api){
         $api->get('index', 'App\Api\Controllers\IndexController@showIndex');
         $api->get('schoolnews', 'App\Api\Controllers\IndexController@showSchoolnews');
         $api->get('articles', 'App\Api\Controllers\ArticleController@showList');
