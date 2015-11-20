@@ -16,7 +16,7 @@ class SettingController extends Controller
         $version_code = Setting::find('version_code');
         $version_code = $version_code ? $version_code->value : '';
         return view('admin.settings', [
-            'active' => 'settings',
+            'active' => 'setting',
             'version_name' => $version_name,
             'version_code' => $version_code,
             ]);
