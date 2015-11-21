@@ -15,8 +15,9 @@ class SettingController extends Controller
         $version_name = $version_name ? $version_name->value : '';
         $version_code = Setting::find('version_code');
         $version_code = $version_code ? $version_code->value : '';
+
         return view('admin.settings', [
-            'active' => 'setting',
+            'active'       => 'setting',
             'version_name' => $version_name,
             'version_code' => $version_code,
             ]);
@@ -30,12 +31,12 @@ class SettingController extends Controller
             }
             $file = $request->file('upload_file');
             $extension = strtolower($file->getClientOriginalExtension());
-            if($extension != 'apk') {
+            if ($extension != 'apk') {
                 return redirect()->route('admin_setting');
             }
-            $filename = $file->getFilename() . '.' . $extension;
-            Storage::put('uploads/'. $filename, file_get_contents($file->getRealPath()));
-            $setting = Setting::firstOrCreate(array('key'=>'apk'));
+            $filename = $file->getFilename().'.'.$extension;
+            Storage::put('uploads/'.$filename, file_get_contents($file->getRealPath()));
+            $setting = Setting::firstOrCreate(['key' => 'apk']);
             $setting->value = $filename;
             $setting->save();
         }
@@ -43,11 +44,11 @@ class SettingController extends Controller
         $available = ['version_code', 'version_name'];
         $data = $request->only($available);
         foreach ($data as $key => $value) {
-            $row = Setting::firstOrCreate(array('key' => $key));
+            $row = Setting::firstOrCreate(['key' => $key]);
             $row->value = $value;
             $row->save();
         }
+
         return redirect()->route('admin_setting');
     }
-    
 }

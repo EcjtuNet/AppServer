@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Admin;
 
@@ -26,6 +25,7 @@ class LoginController extends Controller
             return view('admin.login', ['failed' => true, 'username' => $username]);
         }
         $request->session()->put('admin', $username);
+
         return redirect()->route('admin_dashboard');
     }
 }

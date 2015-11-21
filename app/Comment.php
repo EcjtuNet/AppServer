@@ -10,11 +10,14 @@ class Comment extends Model
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $fillable = ['author', 'content'];
-    public function scopeNewest ($query) {
+
+    public function scopeNewest($query)
+    {
         return $query->orderBy('created_at', 'desc');
     }
 
-    public function commentable() {
+    public function commentable()
+    {
         return $this->morphTo();
     }
 }

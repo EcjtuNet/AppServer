@@ -7,11 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     protected $fillable = ['text'];
+
     public function articles()
     {
         return $this->belongsToMany('App\Article');
     }
-    public function scopeNewest($query) {
+
+    public function scopeNewest($query)
+    {
         return $query->orderBy('created_at', 'desc');
     }
 }

@@ -11,12 +11,13 @@ class CategoryController extends Controller
     public function showList()
     {
         $categories = Category::newest()->paginate(10);
+
         return view('admin.category', [
-            'active' => 'category',
-            'categories' => $categories
+            'active'     => 'category',
+            'categories' => $categories,
             ]);
     }
-    
+
     public function submit(Request $request)
     {
         $text = $request->input('text');
@@ -24,6 +25,7 @@ class CategoryController extends Controller
             return redirect()->route('admin_category_list');
         }
         Category::create(['text' => $text]);
+
         return redirect()->route('admin_category_list');
     }
 
@@ -39,6 +41,7 @@ class CategoryController extends Controller
         }
         $category->text = $text;
         $category->save();
+
         return redirect()->route('admin_category_list');
     }
 }
