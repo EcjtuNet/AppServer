@@ -1,6 +1,7 @@
 # 日新网手机客户端后台管理&数据接口
 
 [![Build Status](https://travis-ci.org/EcjtuNet/AppServer.svg?branch=laravel)](https://travis-ci.org/EcjtuNet/AppServer)
+[![StyleCI](https://styleci.io/repos/32969435/shield)](https://styleci.io/repos/32969435)
 
 介绍
 ----
