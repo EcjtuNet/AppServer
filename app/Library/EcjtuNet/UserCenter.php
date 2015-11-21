@@ -1,5 +1,5 @@
 <?php
-namespace App\Library\EcjtuNet
+namespace App\Library\EcjtuNet;
 use \Curl\Curl;
 class UserCenter {
     const BASE_URL = 'user.ecjtu.net/api';
