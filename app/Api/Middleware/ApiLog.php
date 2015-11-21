@@ -11,6 +11,7 @@ class ApiLog
     {
         $response = $next($request);
         Log::record('api', $request->path());
+
         return $response;
     }
 }

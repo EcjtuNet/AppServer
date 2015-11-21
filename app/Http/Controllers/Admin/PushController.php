@@ -14,7 +14,7 @@ class PushController extends Controller
     {
         $pushes = Push::with('article')->orderBy('created_at', 'desc')->paginate(10);
         $msg_list = $pushes->lists('msg_id');
-        if( $msg_list->isEmpty() ) {
+        if ($msg_list->isEmpty()) {
             return view('admin.push', [
                 'active' => 'push',
                 'pushes' => [],
@@ -25,14 +25,16 @@ class PushController extends Controller
         $result = $jpush->report($msg_ids)->received_list;
         $pushes = $pushes->each(function ($push) use ($result) {
             foreach ($result as $row) {
-                if($push->msg_id == $row->msg_id && $row->android_received > $push->received) {
+                if ($push->msg_id == $row->msg_id && $row->android_received > $push->received) {
                     $push->received = $row->android_received;
                     break;
                 }
             }
             $push->save();
+
             return $push;
         });
+
         return view('admin.push', [
             'active' => 'push',
             'pushes' => $pushes,
@@ -58,15 +60,16 @@ class PushController extends Controller
         $result = $jpush->push()
             ->setPlatform(M\all)
             ->setAudience(M\all)
-            ->setNotification(M\notification(M\android($message, $title, 1, array("articleId"=>$aid, "url"=>$url))))
+            ->setNotification(M\notification(M\android($message, $title, 1, ['articleId' => $aid, 'url' => $url])))
             ->send();
-        $push = Push::create(array(
-            'msg_id' => $result->msg_id,
-            'title' => $title,
-            'message' => $message,
+        $push = Push::create([
+            'msg_id'     => $result->msg_id,
+            'title'      => $title,
+            'message'    => $message,
             'article_id' => $aid,
-        ));
+        ]);
         $push->save();
+
         return redirect()->route('admin_push_list');
     }
 }

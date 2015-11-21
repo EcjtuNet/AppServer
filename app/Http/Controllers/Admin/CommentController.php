@@ -10,8 +10,9 @@ class CommentController extends Controller
     public function showList()
     {
         $comments = Comment::newest()->paginate(10);
+
         return view('admin.comment', [
-            'active' => 'comment',
+            'active'   => 'comment',
             'comments' => $comments,
         ]);
     }
@@ -19,6 +20,7 @@ class CommentController extends Controller
     public function delete($id)
     {
         Comment::destroy($id);
+
         return redirect()->route('admin_comment_list');
     }
 }

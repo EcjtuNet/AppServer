@@ -11,9 +11,10 @@ class DashboardController extends Controller
     {
         $logs = Log::newest()->take(10)->get();
         $downloadCount = Log::where('type', '=', 'download')->count();
+
         return view('admin.dashboard', [
-            'active' => 'dashboard',
-            'logs' => $logs,
+            'active'        => 'dashboard',
+            'logs'          => $logs,
             'downloadCount' => $downloadCount,
         ]);
     }
