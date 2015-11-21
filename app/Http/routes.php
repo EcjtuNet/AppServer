@@ -16,7 +16,6 @@
  */
 $api = app('Dingo\Api\Routing\Router');
 
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -54,7 +53,7 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'namespace' => 'Admi
 });
 
 $api->version('v1', function ($api) {
-    $api->group(['middleware' => 'ApiLog', 'prefix' => 'v1'], function ($api){
+    $api->group(['middleware' => 'ApiLog', 'prefix' => 'v1'], function ($api) {
         $api->get('index', 'App\Api\Controllers\IndexController@showIndex');
         $api->get('schoolnews', 'App\Api\Controllers\IndexController@showSchoolnews');
         $api->get('articles', 'App\Api\Controllers\ArticleController@showList');
@@ -65,5 +64,5 @@ $api->version('v1', function ($api) {
         $api->get('version', 'App\Api\Controllers\VersionController@show');
         $api->post('feedback', 'App\Api\Controllers\FeedbackController@submit');
     });
-    
+
 });

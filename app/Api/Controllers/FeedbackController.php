@@ -2,9 +2,8 @@
 
 namespace App\Api\Controllers;
 
-use App\Api\Controllers\Controller;
-use Dingo\Api\Http\Request;
 use App\Feedback;
+use Dingo\Api\Http\Request;
 
 class FeedbackController extends Controller
 {
@@ -26,13 +25,14 @@ class FeedbackController extends Controller
         if (!$content) {
             return [
                 'status' => false,
-                'msg' => '请输入内容',
+                'msg'    => '请输入内容',
                 ];
         }
         $feedback = Feedback::create([
             'nikename' => $nikename,
-            'content' => $content,
+            'content'  => $content,
             ]);
+
         return ['status' => 200];
     }
 }

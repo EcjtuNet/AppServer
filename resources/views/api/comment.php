@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="row">
-        <?php foreach ($comments as $comment ) : ?>
+        <?php foreach ($comments as $comment) : ?>
         <div class="review-card s12 waves-effect light-waves">
             <h6 class="review-title">
                 <span class="user-avatar"><img src="http://<?php echo $comment->avatar; ?>" alt="头像"></span>

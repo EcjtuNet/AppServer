@@ -1,34 +1,49 @@
 <?php
+
 namespace App\Library\EcjtuNet;
-use \Curl\Curl;
-class UserCenter {
+
+use Curl\Curl;
+
+class UserCenter
+{
     const BASE_URL = 'user.ecjtu.net/api';
-    public function __construct(){
+
+    public function __construct()
+    {
         $this->curl = new Curl();
     }
-    protected function get($url, $params=array()){
+
+    protected function get($url, $params = [])
+    {
         $result = '';
-        if($params)
+        if ($params) {
             $result = $this->curl->get($url, $params);
-        else
+        } else {
             $result = $this->curl->get($url);
+        }
         $result = json_decode($result, true);
-        if(!isset($result['result']) || $result['result']==false)
+        if (!isset($result['result']) || $result['result'] == false) {
             return false;
+        }
+
         return $result;
     }
-    public function getUser($sid, $token=''){
+
+    public function getUser($sid, $token = '')
+    {
         $result = '';
-        if($token){
-            $result = $this->get(self::BASE_URL.'/user/'.$sid, array(
-                'token' => $token
-            ));
-        }else{
+        if ($token) {
+            $result = $this->get(self::BASE_URL.'/user/'.$sid, [
+                'token' => $token,
+            ]);
+        } else {
             $result = $this->get(self::BASE_URL.'/user/'.$sid);
         }
-        if(!$result)
+        if (!$result) {
             return false;
+        }
         $user = $result['user'];
+
         return $user;
     }
 }

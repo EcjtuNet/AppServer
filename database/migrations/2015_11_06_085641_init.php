@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class Init extends Migration
+class init extends Migration
 {
     /**
      * Run the migrations.
@@ -48,7 +48,7 @@ class Init extends Migration
         Schema::create('article_category', function (Blueprint $table) {
             $table->integer('article_id');
             $table->integer('category_id');
-            $table->primary(array('article_id', 'category_id'));
+            $table->primary(['article_id', 'category_id']);
         });
         Schema::create('settings', function (Blueprint $table) {
             $table->string('key');
@@ -69,7 +69,7 @@ class Init extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-        Schema::create('feedbacks',function(Blueprint $table){
+        Schema::create('feedbacks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nikename');
             $table->string('content');

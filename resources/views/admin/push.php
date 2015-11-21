@@ -32,7 +32,7 @@
         </tr>
       </thead>
       <tbody>
-        <?php foreach($pushes as $push): ?>
+        <?php foreach ($pushes as $push): ?>
         <tr>
           <td><?php echo $push->id; ?></td>
           <td><?php echo $push->msg_id; ?></td>

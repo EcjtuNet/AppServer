@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AdminTest extends TestCase
 {
@@ -18,6 +16,7 @@ class AdminTest extends TestCase
             ->press('登录')
             ->seePageIs('/admin/dashboard');
     }
+
     public function testView()
     {
         $this->withoutMiddleware();
@@ -37,16 +36,18 @@ class AdminTest extends TestCase
         $this->visit('/admin/setting')
             ->see('设置信息');
     }
+
     public function testDashboard()
     {
         $log = factory(App\Log::class)->create([
-            'type' => 'api',
-            'content' => 'api/index'
+            'type'    => 'api',
+            'content' => 'api/index',
             ]);
         $this->withSession(['admin' => 'admin'])
             ->visit('/admin/dashboard')
             ->see('api/index');
     }
+
     public function testArticle()
     {
         $this->withSession(['admin' => 'admin'])

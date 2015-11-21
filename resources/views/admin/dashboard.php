@@ -37,7 +37,7 @@
                 </tr>
               </thead>
               <tbody>
-                <?php foreach($logs as $log): ?>
+                <?php foreach ($logs as $log): ?>
                 <tr>
                   <td><?php echo $log->id; ?></td>
                   <td><?php echo $log->type; ?></td>

@@ -30,7 +30,7 @@
 
       <form class="form-signin" method="POST" action="">
         <h2 class="form-signin-heading">请登录</h2>
-        <?php if($failed): ?>
+        <?php if ($failed): ?>
         <div class="alert alert-danger" role="alert">登录失败，用户名或密码错误</div>
         <?php endif;?>
         <label for="inputEmail" class="sr-only">用户名</label>
