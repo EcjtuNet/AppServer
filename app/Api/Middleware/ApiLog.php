@@ -2,8 +2,8 @@
 
 namespace App\Api\Middleware;
 
-use Closure;
 use App\Log;
+use Closure;
 
 class ApiLog
 {
@@ -11,6 +11,7 @@ class ApiLog
     {
         $response = $next($request);
         Log::record('api', $request->path());
+
         return $response;
     }
 }

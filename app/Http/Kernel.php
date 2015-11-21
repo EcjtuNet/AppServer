@@ -25,7 +25,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'admin' => \App\Http\Middleware\Authenticate::class,
+        'admin'  => \App\Http\Middleware\Authenticate::class,
         'ApiLog' => \App\Api\Middleware\ApiLog::class,
     ];
 }

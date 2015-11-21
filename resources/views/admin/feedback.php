@@ -11,7 +11,7 @@
         </tr>
       </thead>
       <tbody>
-      	<?php foreach($feedbacks as $feedback): ?>
+      	<?php foreach ($feedbacks as $feedback): ?>
         <tr>
           <td><?php echo $feedback->id; ?></td>
           <td><?php echo $feedback->nikename; ?></td>

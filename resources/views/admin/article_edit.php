@@ -22,7 +22,7 @@
   </div>
   <div class="input-group">
     <span class="input-group-addon" id="sizing-addon1" >分类</span>
-    <?php foreach($categories as $category): ?>
+    <?php foreach ($categories as $category): ?>
       <input type="checkbox" autocomplete="off" name="categories[<?php echo $category->id; ?>]" <?php echo $category->checked ? 'checked' : ''; ?>><?php echo $category->text;?>
     <?php endforeach; ?>
   </div>
