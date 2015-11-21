@@ -1,0 +1,384 @@
+[
+  {
+    "type": "get",
+    "url": "/article/:id",
+    "title": "获取文章信息",
+    "version": "1.0.0",
+    "name": "GetArticle",
+    "group": "Article",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>文章ID</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "status",
+            "description": "<p>状态码</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>文章ID</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "title",
+            "description": "<p>文章标题</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "info",
+            "description": "<p>文章描述</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "click",
+            "description": "<p>点击数</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Boolean</p> ",
+            "optional": false,
+            "field": "published",
+            "description": "<p>文章是否发布</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Date</p> ",
+            "optional": false,
+            "field": "published_at",
+            "description": "<p>发布时间</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "thumb",
+            "description": "<p>文章缩略图地址</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Date</p> ",
+            "optional": false,
+            "field": "deleted_at",
+            "description": "<p>文章删除时间</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Date</p> ",
+            "optional": false,
+            "field": "created_at",
+            "description": "<p>文章创建时间</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Date</p> ",
+            "optional": false,
+            "field": "updated_at",
+            "description": "<p>文章更新时间</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "content",
+            "description": "<p>文章内容</p> "
+          }
+        ]
+      }
+    },
+    "filename": "app/Api/Controllers/ArticleController.php",
+    "groupTitle": "Article"
+  },
+  {
+    "type": "get",
+    "url": "/articles",
+    "title": "获取文章列表",
+    "version": "1.0.0",
+    "name": "GetArticleList",
+    "group": "Article",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "status",
+            "description": "<p>状态码</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "count",
+            "description": "<p>文章的数量</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": false,
+            "field": "articles",
+            "description": "<p>文章列表</p> "
+          }
+        ]
+      }
+    },
+    "filename": "app/Api/Controllers/ArticleController.php",
+    "groupTitle": "Article"
+  },
+  {
+    "type": "post",
+    "url": "/article/:id/comment",
+    "title": "提交评论",
+    "version": "1.0.0",
+    "name": "PostComment",
+    "group": "Comment",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>文章ID</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "content",
+            "description": "<p>评论内容</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>文章ID</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "content",
+            "description": "<p>评论内容</p> "
+          }
+        ]
+      }
+    },
+    "filename": "app/Api/Controllers/CommentController.php",
+    "groupTitle": "Comment"
+  },
+  {
+    "type": "post",
+    "url": "/feedback",
+    "title": "提交反馈",
+    "version": "1.0.0",
+    "name": "PostFeedback",
+    "group": "Feedback",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "nickname",
+            "description": "<p>昵称</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "content",
+            "description": "<p>反馈内容</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "status",
+            "description": "<p>状态码</p> "
+          }
+        ]
+      }
+    },
+    "filename": "app/Api/Controllers/FeedbackController.php",
+    "groupTitle": "Feedback"
+  },
+  {
+    "type": "get",
+    "url": "/index",
+    "title": "首页",
+    "version": "1.0.0",
+    "name": "GetIndex",
+    "group": "Index",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "status",
+            "description": "<p>状态码</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object</p> ",
+            "optional": false,
+            "field": "slide_article",
+            "description": "<p>轮转图文章</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "slide_article.count",
+            "description": "<p>轮转图文章数量</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": false,
+            "field": "slide_article.articles",
+            "description": "<p>轮转图文章列表</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object</p> ",
+            "optional": false,
+            "field": "normal_article",
+            "description": "<p>普通文章</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "normal_article.count",
+            "description": "<p>普通文章数量</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": false,
+            "field": "normal_article.articles",
+            "description": "<p>普通文章列表</p> "
+          }
+        ]
+      }
+    },
+    "filename": "app/Api/Controllers/IndexController.php",
+    "groupTitle": "Index"
+  },
+  {
+    "type": "get",
+    "url": "/schoolnews",
+    "title": "学院新闻",
+    "version": "1.0.0",
+    "name": "GetSchoolnews",
+    "group": "Index",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "status",
+            "description": "<p>状态码</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "count",
+            "description": "<p>学院新闻数量</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Object[]</p> ",
+            "optional": false,
+            "field": "articles",
+            "description": "<p>学院新闻列表</p> "
+          }
+        ]
+      }
+    },
+    "filename": "app/Api/Controllers/IndexController.php",
+    "groupTitle": "Index"
+  },
+  {
+    "type": "get",
+    "url": "/version",
+    "title": "App版本号",
+    "version": "1.0.0",
+    "name": "GetVersion",
+    "group": "Version",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "status",
+            "description": "<p>状态码</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "version_name",
+            "description": "<p>版本名</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "version_code",
+            "description": "<p>版本号</p> "
+          }
+        ]
+      }
+    },
+    "filename": "app/Api/Controllers/VersionController.php",
+    "groupTitle": "Version"
+  }
+]

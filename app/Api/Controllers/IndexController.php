@@ -9,6 +9,20 @@ use App\Article;
 
 class IndexController extends Controller
 {
+    /**
+     * @api {get} /index 首页
+     * @apiVersion 1.0.0
+     * @apiName GetIndex
+     * @apiGroup Index
+     * 
+     * @apiSuccess {Number} status 状态码
+     * @apiSuccess {Object} slide_article 轮转图文章
+     * @apiSuccess {Number} slide_article.count 轮转图文章数量
+     * @apiSuccess {Object[]} slide_article.articles 轮转图文章列表
+     * @apiSuccess {Object} normal_article 普通文章
+     * @apiSuccess {Number} normal_article.count 普通文章数量
+     * @apiSuccess {Object[]} normal_article.articles 普通文章列表
+     */
     public function showIndex(Request $request)
     {
         $until = intval($request->get('until'));
@@ -52,6 +66,16 @@ class IndexController extends Controller
         return $return;
     }
 
+    /**
+     * @api {get} /schoolnews 学院新闻
+     * @apiVersion 1.0.0
+     * @apiName GetSchoolnews
+     * @apiGroup Index
+     *
+     * @apiSuccess {Number} status 状态码
+     * @apiSuccess {Number} count 学院新闻数量
+     * @apiSuccess {Object[]} articles 学院新闻列表
+     */
     public function showSchoolnews(Request $request)
     {
         $until = intval($request->get('until'));

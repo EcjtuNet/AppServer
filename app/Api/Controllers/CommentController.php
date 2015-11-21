@@ -10,6 +10,18 @@ use App\Library\EcjtuNet\UserCenter;
 
 class CommentController extends Controller
 {
+    /**
+     * @api {post} /article/:id/comment 提交评论
+     * @apiVersion 1.0.0
+     * @apiName PostComment
+     * @apiGroup Comment
+     *
+     * @apiParam {Number} id 文章ID
+     * @apiParam {String} content 评论内容
+     *
+     * @apiSuccess {Number} id 文章ID
+     * @apiSuccess {String} content 评论内容
+     */
     public function submit(Request $request)
     {
         $article = Article::published()->findOrFail($id);

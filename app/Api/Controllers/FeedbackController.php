@@ -8,6 +8,17 @@ use App\Feedback;
 
 class FeedbackController extends Controller
 {
+    /**
+     * @api {post} /feedback 提交反馈
+     * @apiVersion 1.0.0
+     * @apiName PostFeedback
+     * @apiGroup Feedback
+     *
+     * @apiParam {String} nickname 昵称
+     * @apiParam {String} content 反馈内容
+     *
+     * @apiSuccess {Number} status 状态码
+     */
     public function submit(Request $request)
     {
         $nikename = $request->input('nickname');
