@@ -20,7 +20,7 @@ class FeedbackController extends Controller
      */
     public function submit(Request $request)
     {
-        $nikename = $request->input('nickname');
+        $nickname = $request->input('nickname');
         $content = $request->input('content');
         if (!$content) {
             return [
@@ -29,7 +29,7 @@ class FeedbackController extends Controller
                 ];
         }
         $feedback = Feedback::create([
-            'nikename' => $nikename,
+            'nickname' => $nickname,
             'content'  => $content,
             ]);
 
