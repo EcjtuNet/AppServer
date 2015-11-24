@@ -13,7 +13,7 @@ class RenameFeedbacksColum extends Migration
     public function up()
     {
         Schema::table('feedbacks', function ($table) {
-            $table->renameColum('nikename', 'nickname');
+            $table->renameColumn('nikename', 'nickname');
         });
     }
 
@@ -25,7 +25,7 @@ class RenameFeedbacksColum extends Migration
     public function down()
     {
         Schema::table('feedbacks', function ($table) {
-            $table->renameColum('nickname', 'nikename');
+            $table->renameColumn('nickname', 'nikename');
         });
     }
 }
