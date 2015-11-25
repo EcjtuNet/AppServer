@@ -1,0 +1,5 @@
+article.use p, article.use ul{
+	font-size: 16px;
+	line-height: 32px;
+	max-width: 540px;
+}
