@@ -9,6 +9,8 @@ install:
   - php artisan clear-compiled
   - php artisan migrate --env="testing"
   - php artisan db:seed --class=InitSeeder --env="testing"
+after_script:
+  - vendor/bin/test-reporter
 services:
   - mysql
 addons:
