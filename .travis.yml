@@ -9,5 +9,10 @@ install:
   - php artisan clear-compiled
   - php artisan migrate --env="testing"
   - php artisan db:seed --class=InitSeeder --env="testing"
+after_script:
+  - vendor/bin/test-reporter
 services:
   - mysql
+addons:
+  - code_climate:
+    - repo_token: c30cdcf462b716c6fa88cd5458f7bce72ccc0a6ba70ea2893026fdeea9118361
