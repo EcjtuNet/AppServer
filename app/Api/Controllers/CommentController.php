@@ -21,7 +21,7 @@ class CommentController extends Controller
      * @apiSuccess {Number} id 文章ID
      * @apiSuccess {String} content 评论内容
      */
-    public function submit(Request $request)
+    public function submit(Request $request, $id)
     {
         $article = Article::published()->findOrFail($id);
         $content = $request->input('content');
