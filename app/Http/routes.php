@@ -63,6 +63,7 @@ $api->version('v1', function ($api) {
         $api->post('article/{id}/comment', 'App\Api\Controllers\CommentController@submit');
         $api->get('version', 'App\Api\Controllers\VersionController@show');
         $api->post('feedback', 'App\Api\Controllers\FeedbackController@submit');
+        $api->post('check','App\Api\Controllers\CheckController@submit');
     });
 
 });
