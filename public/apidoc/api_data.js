@@ -11,10 +11,10 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "<p>Number</p> ",
+            "type": "Number",
             "optional": false,
             "field": "id",
-            "description": "<p>文章ID</p> "
+            "description": "<p>文章ID</p>"
           }
         ]
       }
@@ -24,87 +24,87 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "<p>Number</p> ",
+            "type": "Number",
             "optional": false,
             "field": "status",
-            "description": "<p>状态码</p> "
+            "description": "<p>状态码</p>"
           },
           {
             "group": "Success 200",
-            "type": "<p>Number</p> ",
+            "type": "Number",
             "optional": false,
             "field": "id",
-            "description": "<p>文章ID</p> "
+            "description": "<p>文章ID</p>"
           },
           {
             "group": "Success 200",
-            "type": "<p>String</p> ",
+            "type": "String",
             "optional": false,
             "field": "title",
-            "description": "<p>文章标题</p> "
+            "description": "<p>文章标题</p>"
           },
           {
             "group": "Success 200",
-            "type": "<p>String</p> ",
+            "type": "String",
             "optional": false,
             "field": "info",
-            "description": "<p>文章描述</p> "
+            "description": "<p>文章描述</p>"
           },
           {
             "group": "Success 200",
-            "type": "<p>Number</p> ",
+            "type": "Number",
             "optional": false,
             "field": "click",
-            "description": "<p>点击数</p> "
+            "description": "<p>点击数</p>"
           },
           {
             "group": "Success 200",
-            "type": "<p>Boolean</p> ",
+            "type": "Boolean",
             "optional": false,
             "field": "published",
-            "description": "<p>文章是否发布</p> "
+            "description": "<p>文章是否发布</p>"
           },
           {
             "group": "Success 200",
-            "type": "<p>Date</p> ",
+            "type": "Date",
             "optional": false,
             "field": "published_at",
-            "description": "<p>发布时间</p> "
+            "description": "<p>发布时间</p>"
           },
           {
             "group": "Success 200",
-            "type": "<p>String</p> ",
+            "type": "String",
             "optional": false,
             "field": "thumb",
-            "description": "<p>文章缩略图地址</p> "
+            "description": "<p>文章缩略图地址</p>"
           },
           {
             "group": "Success 200",
-            "type": "<p>Date</p> ",
+            "type": "Date",
             "optional": false,
             "field": "deleted_at",
-            "description": "<p>文章删除时间</p> "
+            "description": "<p>文章删除时间</p>"
           },
           {
             "group": "Success 200",
-            "type": "<p>Date</p> ",
+            "type": "Date",
             "optional": false,
             "field": "created_at",
-            "description": "<p>文章创建时间</p> "
+            "description": "<p>文章创建时间</p>"
           },
           {
             "group": "Success 200",
-            "type": "<p>Date</p> ",
+            "type": "Date",
             "optional": false,
             "field": "updated_at",
-            "description": "<p>文章更新时间</p> "
+            "description": "<p>文章更新时间</p>"
           },
           {
             "group": "Success 200",
-            "type": "<p>String</p> ",
+            "type": "String",
             "optional": false,
             "field": "content",
-            "description": "<p>文章内容</p> "
+            "description": "<p>文章内容</p>"
           }
         ]
       }
@@ -124,30 +124,94 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "<p>Number</p> ",
+            "type": "Number",
             "optional": false,
             "field": "status",
-            "description": "<p>状态码</p> "
+            "description": "<p>状态码</p>"
           },
           {
             "group": "Success 200",
-            "type": "<p>Number</p> ",
+            "type": "Number",
             "optional": false,
             "field": "count",
-            "description": "<p>文章的数量</p> "
+            "description": "<p>文章的数量</p>"
           },
           {
             "group": "Success 200",
-            "type": "<p>Object[]</p> ",
+            "type": "Object[]",
             "optional": false,
             "field": "articles",
-            "description": "<p>文章列表</p> "
+            "description": "<p>文章列表</p>"
           }
         ]
       }
     },
     "filename": "app/Api/Controllers/ArticleController.php",
     "groupTitle": "Article"
+  },
+  {
+    "type": "post",
+    "url": "/check",
+    "title": "签到",
+    "version": "1.0.0",
+    "name": "PostCheck",
+    "group": "Check",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "sid",
+            "description": "<p>学号</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "status",
+            "description": "<p>状态码</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>返回说明</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "times",
+            "description": "<p>总签到数</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "combos",
+            "description": "<p>连续签到数</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "marks",
+            "description": "<p>积分</p>"
+          }
+        ]
+      }
+    },
+    "filename": "app/Api/Controllers/CheckController.php",
+    "groupTitle": "Check"
   },
   {
     "type": "post",
@@ -161,17 +225,17 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "<p>Number</p> ",
+            "type": "Number",
             "optional": false,
             "field": "id",
-            "description": "<p>文章ID</p> "
+            "description": "<p>文章ID</p>"
           },
           {
             "group": "Parameter",
-            "type": "<p>String</p> ",
+            "type": "String",
             "optional": false,
             "field": "content",
-            "description": "<p>评论内容</p> "
+            "description": "<p>评论内容</p>"
           }
         ]
       }
@@ -181,17 +245,17 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "<p>Number</p> ",
+            "type": "Number",
             "optional": false,
             "field": "id",
-            "description": "<p>文章ID</p> "
+            "description": "<p>文章ID</p>"
           },
           {
             "group": "Success 200",
-            "type": "<p>String</p> ",
+            "type": "String",
             "optional": false,
             "field": "content",
-            "description": "<p>评论内容</p> "
+            "description": "<p>评论内容</p>"
           }
         ]
       }
@@ -211,17 +275,17 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "<p>String</p> ",
+            "type": "String",
             "optional": false,
             "field": "nickname",
-            "description": "<p>昵称</p> "
+            "description": "<p>昵称</p>"
           },
           {
             "group": "Parameter",
-            "type": "<p>String</p> ",
+            "type": "String",
             "optional": false,
             "field": "content",
-            "description": "<p>反馈内容</p> "
+            "description": "<p>反馈内容</p>"
           }
         ]
       }
@@ -231,10 +295,10 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "<p>Number</p> ",
+            "type": "Number",
             "optional": false,
             "field": "status",
-            "description": "<p>状态码</p> "
+            "description": "<p>状态码</p>"
           }
         ]
       }
@@ -254,52 +318,52 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "<p>Number</p> ",
+            "type": "Number",
             "optional": false,
             "field": "status",
-            "description": "<p>状态码</p> "
+            "description": "<p>状态码</p>"
           },
           {
             "group": "Success 200",
-            "type": "<p>Object</p> ",
+            "type": "Object",
             "optional": false,
             "field": "slide_article",
-            "description": "<p>轮转图文章</p> "
+            "description": "<p>轮转图文章</p>"
           },
           {
             "group": "Success 200",
-            "type": "<p>Number</p> ",
+            "type": "Number",
             "optional": false,
             "field": "slide_article.count",
-            "description": "<p>轮转图文章数量</p> "
+            "description": "<p>轮转图文章数量</p>"
           },
           {
             "group": "Success 200",
-            "type": "<p>Object[]</p> ",
+            "type": "Object[]",
             "optional": false,
             "field": "slide_article.articles",
-            "description": "<p>轮转图文章列表</p> "
+            "description": "<p>轮转图文章列表</p>"
           },
           {
             "group": "Success 200",
-            "type": "<p>Object</p> ",
+            "type": "Object",
             "optional": false,
             "field": "normal_article",
-            "description": "<p>普通文章</p> "
+            "description": "<p>普通文章</p>"
           },
           {
             "group": "Success 200",
-            "type": "<p>Number</p> ",
+            "type": "Number",
             "optional": false,
             "field": "normal_article.count",
-            "description": "<p>普通文章数量</p> "
+            "description": "<p>普通文章数量</p>"
           },
           {
             "group": "Success 200",
-            "type": "<p>Object[]</p> ",
+            "type": "Object[]",
             "optional": false,
             "field": "normal_article.articles",
-            "description": "<p>普通文章列表</p> "
+            "description": "<p>普通文章列表</p>"
           }
         ]
       }
@@ -319,24 +383,24 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "<p>Number</p> ",
+            "type": "Number",
             "optional": false,
             "field": "status",
-            "description": "<p>状态码</p> "
+            "description": "<p>状态码</p>"
           },
           {
             "group": "Success 200",
-            "type": "<p>Number</p> ",
+            "type": "Number",
             "optional": false,
             "field": "count",
-            "description": "<p>学院新闻数量</p> "
+            "description": "<p>学院新闻数量</p>"
           },
           {
             "group": "Success 200",
-            "type": "<p>Object[]</p> ",
+            "type": "Object[]",
             "optional": false,
             "field": "articles",
-            "description": "<p>学院新闻列表</p> "
+            "description": "<p>学院新闻列表</p>"
           }
         ]
       }
@@ -356,24 +420,24 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "<p>Number</p> ",
+            "type": "Number",
             "optional": false,
             "field": "status",
-            "description": "<p>状态码</p> "
+            "description": "<p>状态码</p>"
           },
           {
             "group": "Success 200",
-            "type": "<p>String</p> ",
+            "type": "String",
             "optional": false,
             "field": "version_name",
-            "description": "<p>版本名</p> "
+            "description": "<p>版本名</p>"
           },
           {
             "group": "Success 200",
-            "type": "<p>Number</p> ",
+            "type": "Number",
             "optional": false,
             "field": "version_code",
-            "description": "<p>版本号</p> "
+            "description": "<p>版本号</p>"
           }
         ]
       }

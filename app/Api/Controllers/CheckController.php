@@ -9,6 +9,20 @@ class CheckController extends Controller{
 
     public function submit(Request $request)
     {
+        /**
+         * @api {post} /check 签到
+         * @apiVersion 1.0.0
+         * @apiName PostCheck
+         * @apiGroup Check
+         *
+         * @apiParam {String} sid 学号
+         *
+         * @apiSuccess {Boolean} status 状态码
+         * @apiSuccess {String} msg 返回说明
+         * @apiSuccess {int} times 总签到数
+         * @apiSuccess {int} combos 连续签到数
+         * @apiSuccess {int} marks 积分
+        **/
         $sid = $request->input('sid');
         $user = Check::find($sid);
         $today = date("Y-m-d", time());
