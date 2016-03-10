@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>日新评论</title>
-    <link rel="stylesheet" href="/css/review.css"/>
     <link rel="stylesheet" href="/css/materialize.min.css">
+    <link rel="stylesheet" href="/css/review.css"/>
     <style>
         @font-face {
           font-family: 'Material Icons';
@@ -33,7 +33,7 @@
 <body>
     <div class="row">
         <?php foreach ($comments as $comment ) : ?>
-        <div class="review-card s12 waves-effect light-waves">
+        <div class="review-card s12 waves-effect waves-default">
             <h6 class="review-title">
                 <span class="user-avatar"><img src="http://<?php echo $comment->avatar; ?>" alt="头像"></span>
                 <span class="user-name"><?php echo $comment->name; ?></span>
