@@ -35,6 +35,18 @@
 /* 变量文件 */
 /* Font
  --------------------------------------------------*/
+@font-face {
+  font-family: 'Blade';
+  src: url("../fonts/blade_2/blade_2-webfont.eot");
+  src: url("../fonts/blade_2/blade_2-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/blade_2/blade_2-webfont.woff") format("woff"), url("../fonts/blade_2/blade_2-webfont.ttf") format("truetype"), url("../fonts/blade_2/blade_2-webfont.svg#Blade") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'flexslider-icon';
+  src: url("../fonts/flexslider-icon.eot");
+  src: url("../fonts/flexslider-icon.eot?#iefix") format("embedded-opentype"), url("../fonts/flexslider-icon.woff") format("woff"), url("../fonts/flexslider-icon.ttf") format("truetype"), url("../fonts/flexslider-icon.svg#Blade") format("svg");
+  font-weight: normal;
+  font-style: normal; }
 /* Web 字体 */
 /* 圆角
  --------------------------------------------------*/
@@ -2983,11 +2995,10 @@ a, a:link, a:hover, a:active {
 /* 页面
  ---------------------------------------------------------- */
 * {
-  -webkit-tap-highlight-color: transparent; }
+  -webkit-tap-highlight-color: transparent;
+  outline: 0; }
 
 html, body {
-  width: 100%;
-  height: 100%;
   font-family: Roboto, Microsoft Yahei, sans-serif; }
 
 html {
@@ -2997,9 +3008,8 @@ body {
   font-size: .14rem; }
 
 .review-card {
-  width: 100%;
   transition: box-shadow .25s;
-  padding: 20px;
+  padding: .12rem;
   /* margin: 0.5rem 0 1rem 0; */
   border-radius: 2px;
   background-color: #fff;
@@ -3008,8 +3018,9 @@ body {
 .review-title {
   position: relative;
   width: 100%;
+  box-sizing: border-box;
   height: auto;
-  padding-left: 3.6rem;
+  padding-left: .72rem;
   margin: 0; }
 
 .user-avatar {
@@ -3017,34 +3028,39 @@ body {
   top: 0;
   left: 0;
   display: inline-block;
-  width: 3.6rem;
-  height: 3.6rem;
+  width: .72rem;
+  height: .72rem;
   border: none;
-  border-radius: 3.6rem;
+  border-radius: .72rem;
   overflow: hidden;
   background: #ccc url(); }
 
 .user-avatar img {
-  width: 3.6rem;
-  height: 3.6rem;
+  width: .72rem;
+  height: .72rem;
   border: none;
-  border-radius: 3.6rem; }
+  border-radius: .72rem;
+  color: #ececec;
+  text-align: center;
+  font: .18rem/.72rem normal Roboto, Microsoft, sans-serif; }
 
 .user-name, .publish-time {
   display: block;
-  height: 1.8rem;
-  margin-left: 20px;
-  line-height: 1.8rem; }
+  box-sizing: border-box;
+  height: .36rem;
+  margin-left: .12rem;
+  line-height: .36rem; }
 
 .publish-time {
   color: #ccc;
-  font-size: 12px; }
+  font-size: .14rem; }
 
 .user-review {
-  margin-top: 20px;
-  line-height: 1.2rem; }
+  margin-top: .12rem;
+  line-height: .24rem; }
 
 .review-tips {
+  width: 100%;
   height: 3.2rem;
   line-height: 3.2rem;
   text-align: center;
